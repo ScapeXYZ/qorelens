@@ -1,0 +1,10 @@
+.env*
+node_modules/
+feasibility/out/
+feasibility/cache/
+
+# Raw upstream vectors can include public fixture key material.
+feasibility/evidence/qoresign-v1.json
+
+feasibility/toolchain/scaffold/
+feasibility/broadcast/

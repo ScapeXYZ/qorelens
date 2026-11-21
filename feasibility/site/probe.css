@@ -1,0 +1,4 @@
+body { margin: 0; font: 16px system-ui, sans-serif; color: #18252e; }
+header { position: sticky; top: 0; padding: 1rem; background: #10343a; color: white; font-weight: bold; }
+main { max-width: 54rem; margin: auto; padding: 1rem; }
+pre { overflow-wrap: anywhere; white-space: pre-wrap; }

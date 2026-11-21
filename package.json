@@ -1,0 +1,9 @@
+{
+  "name": "qorelens",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "diag": "node feasibility/diag.mjs",
+    "runner": "node feasibility/serve.mjs"
+  }
+}

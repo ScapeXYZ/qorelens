@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="en">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; connect-src 'self' https://evm-testnet.qore.host https://rpc-testnet.qore.host https://api-testnet.qore.host; object-src 'none'; base-uri 'none'">
+<title>QoreLens Phase 0</title>
+<link rel="stylesheet" href="probe.css">
+<header>TESTNET · QoreChain Diana</header>
+<main>
+  <h1>QoreLens Phase 0</h1>
+  <button id="probe" type="button">Run endpoint and wallet discovery</button>
+  <p>Wallet actions require the live Diana network guard and address confirmation.</p>
+  <label>QoreX version (if undetected) <input id="version" autocomplete="off"></label>
+  <p><button id="guided" type="button">Start final guided Diana session</button></p>
+  <p><label>EVM account <input id="account" autocomplete="off"></label>
+  <label>Probe contract (optional) <input id="wrapper" autocomplete="off"></label></p>
+  <button id="registry" type="button">Read Diana registry or probe</button>
+  <button id="benchmark" type="button">Run published PQ vectors and timings</button>
+  <button id="save" type="button">Save to local collector</button>
+  <button id="download" type="button">Download results</button>
+  <pre id="results" aria-live="polite"></pre>
+</main>
+<script type="module" src="probe.mjs"></script>
