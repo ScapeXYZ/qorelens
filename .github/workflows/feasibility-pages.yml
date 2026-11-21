@@ -26,3 +26,5 @@ jobs:
           path: feasibility/site
       - uses: actions/deploy-pages@v4.0.5
         id: deploy
+
+# QoreLens Pages deployment
