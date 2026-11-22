@@ -1,6 +1,14 @@
 import { connectProvider, inspectWallet } from "../wallet/adapter.mjs";
 import { bindAccount } from "./account.mjs";
-import { evidence, emptyMatrix } from "./evidence.mjs";
+import {
+  evidence,
+  emptyMatrix,
+  keyBindingEvidence,
+  invalidKeyReason,
+  validBinding,
+  walletCrossCheckVerdict,
+  withReason,
+} from "./evidence.mjs";
 import { diana, probe, probeDeployer } from "../chain/network.mjs";
 import { keyStatus, pqcVerify, rpc } from "../chain/precompiles.mjs";
 import { encodeSelfTransfer } from "../verify/crypto.mjs";
@@ -14,11 +22,17 @@ const toHex = (bytes) => "0x" + hexString(bytes);
 export async function probeEvidence() {
   const start = performance.now();
   try {
-    return evidence("CHAIN-OBSERVED", {
+    const result = await keyStatus(probeDeployer, probe);
+    return evidence(validBinding(result) ? "CHAIN-OBSERVED" : "MISMATCH", {
+      ...(validBinding(result)
+        ? {}
+        : {
+            reason: "Probe registry result lacks the expected registered key",
+          }),
       evidenceClass: "INDEPENDENT",
       observed: "Diana wrapper returned registry data",
       address: probe,
-      result: await keyStatus(probeDeployer, probe),
+      result,
       ms: performance.now() - start,
     });
   } catch (error) {
@@ -44,7 +58,10 @@ export async function runSession({
     results: matrix,
   };
   const set = (name, value) => {
-    matrix[name] = value;
+    matrix[name] = withReason(
+      value,
+      "Independent verification did not meet the expected outcomes",
+    );
     update(run);
   };
   const failure = (error, verdict = "BLOCKED") =>
@@ -170,22 +187,9 @@ export async function runSession({
     )
       throw Error("Native QoreX provider reports a different chain");
     binding = await keyStatus(signer.hex);
-    set(
-      "Key binding",
-      evidence("CHAIN-OBSERVED", {
-        evidenceClass: "INDEPENDENT",
-        observed: "Native signer registry read",
-        binding,
-      }),
-    );
-    if (
-      !binding.registered ||
-      binding.algorithmId !== 1 ||
-      binding.keyBytes !== 2592
-    )
-      throw Error(
-        "Native signer is not registered with a valid Diana ML-DSA-87 key",
-      );
+    const keyEvidence = keyBindingEvidence(binding);
+    set("Key binding", keyEvidence);
+    if (keyEvidence.verdict === "BLOCKED") throw Error(invalidKeyReason);
     if ((await confirmSigner(signer)) !== signer.bech32.slice(-6))
       throw Error("Native signer address confirmation did not match");
     guard = true;
@@ -226,6 +230,10 @@ export async function runSession({
     };
   } catch (error) {
     set("Network guard", failure(error));
+    set(
+      "Hybrid transaction",
+      evidence("NOT EXERCISED", { reason: "Diana network guard did not pass" }),
+    );
     await wrapper;
     return run;
   }
@@ -295,6 +303,11 @@ export async function runSession({
           observed: "Native signer registry read",
           binding,
         });
+      } else if (matrix["Message signing"].verdict === "NOT EXERCISED") {
+        set(
+          "Message signing",
+          evidence("BLOCKED", { reason: "QoreX did not return a signature" }),
+        );
       }
     }
   } catch (error) {
@@ -332,22 +345,20 @@ export async function runSession({
           });
         }
       }
+      const verdict = walletCrossCheckVerdict(checks);
       set(
         "Wallet verify cross-check",
-        evidence(
-          checks.some(
-            (x) => typeof x.observed === "boolean" && x.observed !== x.expected,
-          )
-            ? "MISMATCH"
-            : checks.every((x) => typeof x.observed === "boolean")
-              ? "WALLET-REPORTED"
-              : "BLOCKED",
-          {
-            evidenceClass: "WALLET-REPORTED",
-            observed: "Three wallet verification checks",
-            checks,
-          },
-        ),
+        evidence(verdict, {
+          evidenceClass: "WALLET-REPORTED",
+          observed: "Three wallet verification checks",
+          reason:
+            verdict === "MISMATCH"
+              ? "Wallet checks did not confirm a valid signature and reject both controls"
+              : verdict === "BLOCKED"
+                ? "Wallet did not return all three verification outcomes"
+                : undefined,
+          checks,
+        }),
       );
     } catch (error) {
       set("Wallet verify cross-check", failure(error));
@@ -378,6 +389,11 @@ export async function runSession({
         {
           evidenceClass: "INDEPENDENT",
           observed: "Diana verification precompile tested",
+          reason: checks.some((x) => x.error)
+            ? "Diana verification precompile returned an error"
+            : checks.every((x, i) => x.observed === (i === 0))
+              ? undefined
+              : "Diana verification precompile disagreed with the expected outcomes",
           checks,
         },
       ),
@@ -416,7 +432,18 @@ export async function runSession({
     if (/^(0x)?[a-f0-9]{64}$/i.test(result?.txHash ?? ""))
       details.explorer =
         "https://dashboard.qorechain.io/explorer/tx/" + result.txHash;
-    set("Hybrid transaction", evidence("WALLET-REPORTED", details));
+    if (result?.code !== 0 || !details.explorer) {
+      set(
+        "Hybrid transaction",
+        evidence("BLOCKED", {
+          ...details,
+          reason:
+            "Wallet did not report a successful transaction with a valid hash",
+        }),
+      );
+    } else {
+      set("Hybrid transaction", evidence("WALLET-REPORTED", details));
+    }
     if (result?.code === 0) {
       const start = performance.now();
       do {
@@ -427,6 +454,7 @@ export async function runSession({
           break;
         }
         const changed =
+          Boolean(details.explorer) &&
           BigInt(details.after.nonce) > BigInt(before.nonce) &&
           BigInt(details.after.balance) < BigInt(before.balance);
         if (changed) {
@@ -443,11 +471,14 @@ export async function runSession({
         }
         await sleep(1500);
       } while (performance.now() - start < 38000);
-      if (matrix["Hybrid transaction"].verdict === "WALLET-REPORTED")
+      if (matrix["Hybrid transaction"].verdict !== "CHAIN-OBSERVED")
         set(
           "Hybrid transaction",
-          evidence("WALLET-REPORTED", {
+          evidence("BLOCKED", {
             ...details,
+            reason:
+              details.pollError ||
+              "Signer nonce and balance movement were not observed on Diana",
             ms: performance.now() - start,
           }),
         );

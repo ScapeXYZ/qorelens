@@ -1,5 +1,5 @@
 import { inspectWallet } from "../wallet/adapter.mjs";
-import { emptyMatrix } from "../lens/evidence.mjs";
+import { emptyMatrix, withReason } from "../lens/evidence.mjs";
 import { probeEvidence, runSession } from "../lens/session.mjs";
 import { selfTest } from "../verify/verdict.mjs";
 import { verifyBuild } from "../report/fingerprint.mjs";
@@ -93,7 +93,7 @@ const render = (run?) => {
     tr.append(heading);
     for (const [col, value] of [
       row.advertised ?? "—",
-      row.observed ?? row.error ?? "—",
+      row.reason ?? row.observed ?? row.error ?? "—",
       row.evidenceClass ?? "—",
       row.verdict,
     ].entries()) {
@@ -188,7 +188,10 @@ actions[0].onclick = () =>
   });
 actions[1].onclick = () =>
   interact(async () => {
-    matrix["Verifier self-test"] = selfTest(vectors);
+    matrix["Verifier self-test"] = withReason(
+      selfTest(vectors),
+      "Verifier fixture outcomes did not match",
+    );
     return {};
   });
 actions[2].onclick = () =>
@@ -219,7 +222,13 @@ element<HTMLInputElement>("import").onchange = async (event) => {
     if (file.size > 2_000_000) throw Error("Report exceeds import limit");
     const imported = await importReport(await file.text());
     element("import-status").textContent =
-      "Imported evidence · hash valid · author and build provenance unverified";
+      "Imported evidence · hash valid · author and build provenance unverified" +
+      (imported.schema === "qorelens-report-v1"
+        ? " · Legacy schema (rc1)"
+        : "") +
+      (build && imported.build.fingerprint !== build.fingerprint
+        ? " · Build fingerprint differs"
+        : "");
     element("imported").textContent = JSON.stringify(imported, null, 2);
   } catch (error) {
     element("import-status").textContent = String(error);

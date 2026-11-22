@@ -1,3 +1,5 @@
+import { reasonRequired, verdicts } from "../lens/evidence.mjs";
+
 const bytes = new TextEncoder();
 export const sha256 = async (data) =>
   Array.from(
@@ -24,11 +26,24 @@ export function canonical(value) {
   return JSON.stringify(value) ?? "null";
 }
 
+const validRows = (results) =>
+  results &&
+  typeof results === "object" &&
+  !Array.isArray(results) &&
+  Object.values(results).every(
+    (row) =>
+      verdicts.has(row?.verdict) &&
+      (!reasonRequired.has(row.verdict) ||
+        (typeof row.reason === "string" && row.reason.trim())),
+  );
+
 export async function createReport(payload) {
   if (!payload?.build?.fingerprint)
     throw Error("A verified build fingerprint is required");
+  if (!validRows(payload.results))
+    throw Error("Invalid report verdict or missing reason");
   const body = JSON.parse(
-    canonical({ schema: "qorelens-report-v1", ...payload }),
+    canonical({ ...payload, schema: "qorelens-report-v2", schemaVersion: 2 }),
   );
   return {
     ...body,
@@ -38,6 +53,7 @@ export async function createReport(payload) {
 
 const markdownCell = (x) => String(x ?? "").replace(/[|\r\n]/g, " ");
 export function renderMarkdown(report) {
+  const legacy = report.schema === "qorelens-report-v1";
   const results = Object.entries(report.results).map(
     ([name, value]) =>
       "| " +
@@ -46,6 +62,7 @@ export function renderMarkdown(report) {
       markdownCell(value.verdict) +
       " | " +
       markdownCell(value.evidenceClass) +
+      (legacy ? "" : " | " + markdownCell(value.reason)) +
       " |",
   );
   return [
@@ -55,8 +72,10 @@ export function renderMarkdown(report) {
     "",
     "SHA-256 " + report.integrity.digest,
     "",
-    "| Capability | Verdict | Evidence |",
-    "| --- | --- | --- |",
+    legacy
+      ? "| Capability | Verdict | Evidence |"
+      : "| Capability | Verdict | Evidence | Reason |",
+    legacy ? "| --- | --- | --- |" : "| --- | --- | --- | --- |",
     ...results,
     "",
     "~~~json",
@@ -76,7 +95,12 @@ export async function importReport(text) {
   const report = JSON.parse(encoded);
   const { integrity, ...body } = report;
   if (
-    body.schema !== "qorelens-report-v1" ||
+    !(
+      body.schema === "qorelens-report-v1" ||
+      (body.schema === "qorelens-report-v2" &&
+        body.schemaVersion === 2 &&
+        validRows(body.results))
+    ) ||
     !body.build?.fingerprint ||
     !body.results ||
     integrity?.algorithm !== "SHA-256" ||

@@ -1,0 +1,126 @@
+{
+  "sessionA": {
+    "source": "recorded real session data",
+    "results": {
+      "Atomic calls": {
+        "verdict": "NOT EXERCISED"
+      },
+      "Deployed probe": {
+        "verdict": "CHAIN-OBSERVED"
+      },
+      "Diana precompile": {
+        "verdict": "CHAIN-OBSERVED"
+      },
+      "Hybrid transaction": {
+        "verdict": "CHAIN-OBSERVED",
+        "code": 0
+      },
+      "Key binding": {
+        "verdict": "VERIFIED",
+        "binding": {
+          "registered": true,
+          "algorithmId": 1,
+          "keyBytes": 2592,
+          "possessionProven": true
+        }
+      },
+      "Message signing": {
+        "verdict": "VERIFIED"
+      },
+      "Network guard": {
+        "verdict": "CHAIN-OBSERVED"
+      },
+      "Provider diagnostics": {
+        "verdict": "WALLET-REPORTED"
+      },
+      "Tamper controls": {
+        "verdict": "VERIFIED"
+      },
+      "Verifier self-test": {
+        "verdict": "VERIFIED"
+      },
+      "Wallet verify cross-check": {
+        "verdict": "WALLET-REPORTED",
+        "checks": [
+          {
+            "expected": true,
+            "name": "valid",
+            "observed": true
+          },
+          {
+            "expected": false,
+            "name": "message bit",
+            "observed": false
+          },
+          {
+            "expected": false,
+            "name": "signature byte",
+            "observed": false
+          }
+        ]
+      },
+      "eth_sendTransaction": {
+        "verdict": "NOT EXERCISED"
+      },
+      "signDirect": {
+        "verdict": "NOT EXERCISED"
+      },
+      "wallet_sendCalls": {
+        "verdict": "NOT EXERCISED"
+      }
+    }
+  },
+  "sessionB": {
+    "source": "recorded real session data",
+    "results": {
+      "Atomic calls": {
+        "verdict": "NOT EXERCISED"
+      },
+      "Deployed probe": {
+        "verdict": "CHAIN-OBSERVED"
+      },
+      "Diana precompile": {
+        "verdict": "NOT EXERCISED"
+      },
+      "Hybrid transaction": {
+        "verdict": "NOT EXERCISED"
+      },
+      "Key binding": {
+        "verdict": "CHAIN-OBSERVED",
+        "binding": {
+          "registered": false,
+          "algorithmId": 0,
+          "keyBytes": 0,
+          "possessionProven": false
+        }
+      },
+      "Message signing": {
+        "verdict": "NOT EXERCISED"
+      },
+      "Network guard": {
+        "verdict": "BLOCKED"
+      },
+      "Provider diagnostics": {
+        "verdict": "WALLET-REPORTED"
+      },
+      "Tamper controls": {
+        "verdict": "NOT EXERCISED"
+      },
+      "Verifier self-test": {
+        "verdict": "VERIFIED"
+      },
+      "Wallet verify cross-check": {
+        "verdict": "NOT EXERCISED"
+      },
+      "eth_sendTransaction": {
+        "verdict": "NOT EXERCISED"
+      },
+      "signDirect": {
+        "verdict": "NOT EXERCISED"
+      },
+      "wallet_sendCalls": {
+        "verdict": "NOT EXERCISED"
+      }
+    }
+  }
+}
