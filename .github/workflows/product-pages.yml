@@ -1,6 +1,14 @@
 name: QoreLens product CI and Pages
 on:
   push:
+    branches: [master]
+    paths:
+      - "src/**"
+      - "site/**"
+      - "scripts/build.mjs"
+      - "test/vectors/public-vectors.json"
+      - "package.json"
+      - "package-lock.json"
   workflow_dispatch:
 permissions:
   contents: read
@@ -48,11 +56,11 @@ jobs:
       - run: npx --no-install playwright install --with-deps chromium
       - run: npm run test:browser
       - uses: actions/upload-pages-artifact@56afc609e74202658d3ffba0e8f6dda462b719fa
-        if: github.ref_name == github.event.repository.default_branch
+        if: github.event_name == 'push' && github.ref_name == github.event.repository.default_branch
         with:
           path: dist
   deploy:
-    if: github.ref_name == github.event.repository.default_branch
+    if: github.event_name == 'push' && github.ref_name == github.event.repository.default_branch
     needs: test
     runs-on: ubuntu-24.04
     permissions:
