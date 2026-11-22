@@ -25,13 +25,13 @@ Session A used QoreX v0.4.3 and comes from the same commit as deployed
 
 ## Requirements and evidence
 
-| Requirement           | Evidence                                                                             |
-| --------------------- | ------------------------------------------------------------------------------------ |
-| Frozen build          | [Release tag][release], [build manifest][fingerprint], [Pages CI][ci]                |
-| Independent PQ check  | [Session A report](evidence/rc2-session-a.json), Message signing and Tamper controls |
-| Diana probe           | [Probe deployment][probe]                                                            |
-| Testnet self-transfer | [rc2 transaction][rc2-tx], block 10570113                                            |
-| Historical acceptance | [Phase 0 replay limitation](docs/PHASE_0_ACCEPTANCE.md), [rc1 transaction][rc1-tx]   |
+| Requirement                                | Evidence                                                                                                                                                                                                                                                                                                                                                   |
+| ------------------------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Frozen build                               | [Release tag][release], [build manifest][fingerprint], [Pages CI][ci]                                                                                                                                                                                                                                                                                      |
+| Message signing — INDEPENDENT              | [Session A report](evidence/rc2-session-a.json) records independent ML-DSA-87 signature verification against the chain-read public key and rejection of all five tamper controls.                                                                                                                                                                          |
+| Diana probe                                | [Probe deployment][probe]                                                                                                                                                                                                                                                                                                                                  |
+| Hybrid-signed transaction — CHAIN-OBSERVED | [rc2 transaction][rc2-tx], block 10570113. Submitted through QoreX and accepted by Diana with code `0`. Diana emitted `pqc_hybrid_verify` with `status=verified`. The event was inspected host-side, outside the browser product. Hybrid signing is inferred from chain-reported evidence. Signature bytes and preimages were not independently inspected. |
+| Historical acceptance                      | [Phase 0 replay limitation](docs/PHASE_0_ACCEPTANCE.md), [rc1 transaction][rc1-tx]                                                                                                                                                                                                                                                                         |
 
 QoreLens was built for [Build Before Q-Day](https://build.qorechain.io/).
 

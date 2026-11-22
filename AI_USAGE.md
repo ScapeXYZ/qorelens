@@ -1,13 +1,12 @@
 # AI usage
 
-| Contributor    | Recorded role                                                                                                                   |
-| -------------- | ------------------------------------------------------------------------------------------------------------------------------- |
-| Codex          | Implemented and tested approved changes, checked evidence, and prepared release and documentation artifacts.                    |
-| Claude         | Product lead responsible for scope, acceptance gates, and release authorization.                                                |
-| ChatGPT        | A separate contribution is not identified in the supplied evidence.                                                             |
-| Grok           | A separate contribution is not identified in the supplied evidence.                                                             |
-| Human operator | Operated normal Chrome and QoreX, reviewed and approved wallet prompts, ran host-only checks, and confirmed remote publication. |
+| Contributor                     | Recorded role                                                                                                                                                                                                                         |
+| ------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Codex                           | Implemented repository code, tests, CI, and documentation drafts.                                                                                                                                                                     |
+| Claude                          | Product lead in chat. Contributed competitor research, the blueprint, acceptance gates, phase instructions, and review of evidence relayed by the developer. Claude had no direct access to the repository, wallet, or chain.         |
+| ChatGPT                         | Provided workflow guidance and verification-result summaries, and drafted instructions for Codex and Claude.                                                                                                                          |
+| Grok                            | Contributed competitive research rounds and candidate recommendations during product selection. Grok made no code contributions.                                                                                                      |
+| Temitope Ishola, human operator | Selected the product, set and approved gates, created and operated wallet and deployer accounts, executed wallet sessions, ran host checks, and approved publication. The amended documentation awaits separate publication approval. |
 
-Wallet approvals and the decision to proceed after the historical evidence gap
-were human actions. Test output, chain responses, and exported reports retain
-their original evidence classifications.
+AI produced most repository code and documentation drafts. Temitope Ishola
+directed the work, performed the live wallet sessions, and reviewed the evidence.
