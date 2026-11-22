@@ -4,12 +4,12 @@ import { message, runWalletGates } from './wallet-gates.mjs';
 import { sdkNetwork } from './sdk-network.mjs';
 
 const byId = (id) => document.getElementById(id);
-const storageName = 'QoreLens final session';
+const storageName = 'QoreLens lane session';
 const state = { origin: location.origin, browser: navigator.userAgent, requests: [], history: [],
   guard: { status: 'BLOCKED', sdk: sdkNetwork,
-    missing: ['Public Diana EVM ID', 'Wallet EVM ID', 'Cross-lane address match'] } };
+    missing: ['Public Diana EVM ID', 'Wallet EVM ID', 'Native signer derivation'] } };
 try {
-  const prior = JSON.parse(sessionStorage.getItem(storageName) ?? sessionStorage.getItem('qorelens-phase0-final-v1'));
+  const prior = JSON.parse(sessionStorage.getItem(storageName));
   if (prior?.origin === location.origin && Array.isArray(prior.history) && Array.isArray(prior.requests)) {
     Object.assign(state, prior);
     state.guard = {...prior.guard, status: 'BLOCKED', sdk: sdkNetwork,
@@ -34,6 +34,11 @@ function introspect() {
     return [name, typeof value === 'function'
       ? { type: 'function', arity: value.length, source: Function.prototype.toString.call(value) }
       : { type: typeof value }];
+  }), () => new Promise((resolve) => {
+    const selection = byId('selection');
+    selection.hidden = false;
+    selection.disabled = false;
+    selection.onclick = () => {selection.hidden = true;selection.disabled = true;selection.onclick = null;resolve();};
   }));
   return { detected: Boolean(wallet), mockDetected: Boolean(window.__qorexMock),
     version: typeof wallet?.version === 'string' ? wallet.version : byId('version').value.trim() || null,
@@ -70,7 +75,7 @@ byId('probe').onclick = () => run(async () => {
   state.endpoints = await readDiana();
   if (!state.guidedAttempted) {
     state.guard.publicEvm = state.endpoints.evm.value ?? null;
-    state.guard.missing = ['Wallet EVM ID', 'Cross-lane address match'];
+    state.guard.missing = ['Wallet EVM ID', 'Native signer derivation'];
     if (!state.guard.publicEvm) state.guard.missing.unshift('Public Diana EVM ID');
   }
   return { wallet: state.wallet, endpoints: state.endpoints };
@@ -83,8 +88,13 @@ byId('guided').onclick = () => run(async () => {
   if (!state.wallet.version) throw new Error('Enter the QoreX version displayed in the extension');
   state.guidedAttempted = true;
   render();
-  try { await runWalletGates(state, state.wallet.version, render); }
-  finally { state.guidedResult = copy({guard: state.guard, gates: state.gates ?? {}, steps: state.steps ?? {}, approvals: state.approvals ?? 0}); }
+  try { await runWalletGates(state, state.wallet.version, render, () => new Promise((resolve) => {
+    const retry = byId('retry');
+    retry.hidden = false;
+    retry.disabled = false;
+    retry.onclick = () => {retry.hidden = true;retry.disabled = true;retry.onclick = null;resolve();};
+  })); }
+  finally { state.guidedResult = copy({guard: state.guard, gates: state.gates ?? {}, steps: state.steps ?? {}, laneIdentity: state.laneIdentity, approvals: state.approvals ?? 0}); }
   return state.guidedResult;
 }, byId('guided'));
 

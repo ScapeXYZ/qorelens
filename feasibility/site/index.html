@@ -11,7 +11,8 @@
   <button id="probe" type="button">Run endpoint and wallet discovery</button>
   <p>Wallet actions require the live Diana network guard and address confirmation.</p>
   <label>QoreX version (if undetected) <input id="version" autocomplete="off"></label>
-  <p><button id="guided" type="button">Start final guided Diana session</button></p>
+  <p><button id="guided" type="button">Start lane identity and signing session</button> <button id="retry" type="button" hidden>Retry QoreX connection once</button></p>
+  <button id="selection" type="button" hidden>After checking the matching account in QoreX, re-read accounts once</button>
   <p><label>EVM account <input id="account" autocomplete="off"></label>
   <label>Probe contract (optional) <input id="wrapper" autocomplete="off"></label></p>
   <button id="registry" type="button">Read Diana registry or probe</button>

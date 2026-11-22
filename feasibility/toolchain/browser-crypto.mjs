@@ -1,3 +1,5 @@
+import { ripemd160 } from '@noble/hashes/legacy.js';
+import { keccak_256 } from '@noble/hashes/sha3.js';
 import { bech32 } from '@scure/base';
 import { TxBody, AuthInfo, SignDoc } from 'cosmjs-types/cosmos/tx/v1beta1/tx';
 import { PubKey } from 'cosmjs-types/cosmos/crypto/secp256k1/keys';
@@ -110,4 +112,22 @@ export function inspectDirect(result, request, walletKey, chainKey) {
   const verifiedV1=verifyPq(chainKey,framed,pqSig);
   return {classical,pq:sameKey&&(verifiedV2||verifiedV1),sameKey,verifiedV2,verifiedV1,
     signatureBytes:pqSig.length,keyBytes:chainKey.length};
+}
+
+export function classifyLaneIdentity(key, evmAccount) {
+  const c = qorAddressHex(key.bech32Address);
+  const d = evmAccount.toLowerCase();
+  const pk = typeof key.pubKey === 'string' ? base64(key.pubKey) : Uint8Array.from(key.pubKey ?? []);
+  if (pk.length !== 33 || ![2,3].includes(pk[0])) throw Error('Native getKey did not provide a compressed secp256k1 public key');
+  const point = secp256k1.Point.fromHex(hexString(pk));
+  const a = '0x'+hexString(ripemd160(sha256(pk)));
+  const b = '0x'+hexString(keccak_256(point.toBytes(false).slice(1)).slice(-20));
+  const scheme = c===a ? 'HASH160' : c===b ? 'KECCAK256' : null;
+  const classification = !scheme ? 'UNRESOLVED' : c===d ? 'SAME_ACCOUNT' :
+    scheme==='HASH160' ? 'DISTINCT_BY_DERIVATION' : 'ACCOUNT_SELECTION_MISMATCH';
+  const nativeKey = {algo:key.algo, pubKey:Array.from(pk), address:key.address, bech32Address:key.bech32Address};
+  for (const [name,value] of Object.entries(key)) {
+    if (/eth|evm/i.test(name) && typeof value==='string' && /^(0x)?[0-9a-f]{40}$/i.test(value)) nativeKey[name]=value;
+  }
+  return {classification,scheme,a,b,c,d,addressesEqual:c===d,nativeKey,evidenceClass:'INDEPENDENT',inputsClass:'WALLET-REPORTED'};
 }

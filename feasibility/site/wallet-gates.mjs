@@ -1,4 +1,4 @@
-import { diana, readDiana } from './network.mjs';
+import { diana } from './network.mjs';
 import { keyStatus, pqcVerify, rpc } from './precompiles.mjs';
 import { sdkNetwork } from './sdk-network.mjs';
 import { base64, framed, hex, hexString, utf8, controls } from './vector-checks.mjs';
@@ -9,7 +9,7 @@ const evmAddress = /^0x[\da-f]{40}$/i;
 const nativeAddress = /^qor1[\da-z]{38}$/;
 const hash = async (data) => hexString(new Uint8Array(await crypto.subtle.digest('SHA-256', data)));
 
-export async function runWalletGates(state, version, update) {
+export async function runWalletGates(state, version, update, waitForConnectionRetry, waitForAccountSelection) {
   const evm = window.qorex?.evm;
   const native = window.qorex?.native;
   const provider = await new Promise((resolve) => {
@@ -28,16 +28,27 @@ export async function runWalletGates(state, version, update) {
   if (!provider || !native || window.__qorexMock) throw new Error('Real QoreX EIP-6963 provider and native bridge are required');
   state.approvals = 0;
   state.walletVersion = version;
-  state.guard = { status: 'BLOCKED', mode:'N0-lite', sdk: sdkNetwork, missing: ['Public Diana EVM ID', 'Wallet EVM ID', 'Cross-lane address match'] };
+  state.guard = { status: 'BLOCKED', mode:'N0-revised', sdk: sdkNetwork, missing: ['Public Diana EVM ID', 'Wallet EVM ID', 'Native signer derivation'] };
   state.steps = Object.fromEntries(['S2','S3','S4','S5'].map(id=>[id,{status:'BLOCKED',error:'N0-lite prerequisites unavailable'}]));
   const step = (id,status,fields={}) => {state.steps[id]={...fields,status};update();};
   state.gates = Object.fromEntries([1,2,3,4,5,6].map((i) => ['G'+i, {status:'BLOCKED', error:'Prerequisite evidence unavailable'}]));
   const gate = (n, status, fields = {}) => { state.gates['G' + n] = {...fields, status}; update(); };
 
+  let connecting = true;
+  let connectionDeclines = 0;
+  let firstWalletRequest = true;
+  const notice = 'QoreX will ask to connect. Approve it if it names your Diana account.';
   async function ask(label, args, invoke, approval = false, signed = false) {
     if (approval && state.approvals >= 6) throw new Error('Six-approval limit reached');
     if (signed && state.guard.status !== 'PASS') throw new Error('N0 did not pass');
-    if (!confirm(label + '\n' + JSON.stringify(args, null, 2))) throw new Error('User declined ' + label);
+    const prefix = firstWalletRequest ? notice + '\n\n' : '';
+    firstWalletRequest = false;
+    if (!confirm(prefix + label + '\n' + JSON.stringify(args, null, 2))) {
+      const error = new Error('User declined ' + label);
+      error.pageDeclined = true;
+      if (connecting) return retryConnection(error, () => ask(label,args,invoke,approval,signed));
+      throw error;
+    }
     if (approval) state.approvals++;
     const record = { label, args, utc: new Date().toISOString() };
     state.requests.push(record);
@@ -46,11 +57,28 @@ export async function runWalletGates(state, version, update) {
       return await invoke();
     } catch (error) {
       record.error = { name: error?.name, code: error?.code, message: error?.message ?? String(error) };
+      if (connecting && Number(error?.code) === 4001) {
+        return retryConnection(error, () => ask(label,args,invoke,approval,signed));
+      }
+      if (signed) {
+        const refusal = new Error(error?.message ?? String(error));
+        refusal.name = error?.name ?? 'Error';
+        refusal.walletRefused = true;
+        throw refusal;
+      }
       throw error;
     } finally {
       record.ms = performance.now() - start;
       update();
     }
+  }
+  async function retryConnection(error, retry) {
+    state.connectionDeclines ??= [];
+    state.connectionDeclines.push({error:String(error),utc:new Date().toISOString()});
+    update();
+    if (++connectionDeclines >= 2) throw error;
+    await waitForConnectionRetry();
+    return retry();
   }
   const evmCall = (method, params = [], approval = false) =>
     ask('QoreX EVM ' + method, { method, params }, () => evm.request({method, params}), approval);
@@ -58,14 +86,12 @@ export async function runWalletGates(state, version, update) {
     ask('QoreX native ' + method, args, () => native[method](...args), approval, signed);
 
   const publicId = await rpc('eth_chainId');
-  state.endpoints = await readDiana();
   state.guard.publicEvm = publicId;
-  state.guard.missing = ['Wallet EVM ID', 'Cross-lane address match'];
+  state.guard.missing = ['Wallet EVM ID', 'Native signer derivation'];
   if (publicId !== diana.evmId || sdkNetwork.evmChainId !== Number(publicId)
       || sdkNetwork.evmRpc !== diana.evm || sdkNetwork.chainId !== diana.cosmosId
       || sdkNetwork.rpc + '/status' !== diana.consensus
-      || new URL(diana.rest).origin !== sdkNetwork.rest
-      || [state.endpoints.consensus, state.endpoints.rest].some((r) => r.value && r.value !== chain)) {
+      || new URL(diana.rest).origin !== sdkNetwork.rest) {
     throw new Error('Public Diana and installed SDK constants disagree or are unavailable');
   }
   const walletChain = await evmCall('eth_chainId');
@@ -73,39 +99,85 @@ export async function runWalletGates(state, version, update) {
   if (walletChain !== publicId) throw new Error('Switch QoreX to Diana in the wallet UI. Wallet EVM chain ID differs.');
   const crypto = await import('./crypto-bundle.mjs');
   await evmCall('eth_requestAccounts', [], true);
-  const [account] = await evmCall('eth_accounts');
-  if (!evmAddress.test(account)) throw new Error('Invalid QoreX EVM account');
-  const key = await nativeCall('getKey', [chain], true);
-  const address = key?.bech32Address;
-  if (!nativeAddress.test(address)) throw new Error('Invalid QoreX native address');
-  const converted = crypto.qorAddressHex(address);
-  state.addresses = {evm:account,native:address,converted};
-  state.guard.nativeIdentity = {chainId:typeof native.chainId==='string'?native.chainId:null,
-    getChainId:typeof native.getChainId, queryUsed:false};
-  if ((state.guard.nativeIdentity.chainId && state.guard.nativeIdentity.chainId !== chain)
-      || converted.toLowerCase() !== account.toLowerCase()) throw new Error('Wallet network or converted cross-lane address mismatch');
-  state.guard.missing = [];
+  state.guard.missing = ['Native signer derivation', 'Native signer Diana registration or reserve', 'Native signer confirmation'];
+  const readIdentity = async () => {
+    const [evmAccount] = await evmCall('eth_accounts');
+    if (!evmAddress.test(evmAccount)) throw Error('Invalid QoreX EVM account');
+    const nativeKey = await nativeCall('getKey',[chain],true);
+    if (!nativeAddress.test(nativeKey?.bech32Address)) throw Error('Invalid QoreX native address');
+    return crypto.classifyLaneIdentity(nativeKey,evmAccount);
+  };
+  let identity = await readIdentity();
+  state.laneIdentity = identity;
   update();
+  connecting = false;
+  if (identity.classification==='ACCOUNT_SELECTION_MISMATCH') {
+    const prior = identity;
+    await waitForAccountSelection();
+    try { identity = await readIdentity(); }
+    catch (error) { state.accountSelectionError=String(error); }
+    state.laneIdentity = {...identity, priorSelection:prior};
+  }
+  const account = identity.c;
+  const address = identity.nativeKey.bech32Address;
+  const key = identity.nativeKey;
+  state.addresses = {'Signer (native lane)':{bech32:address,hex:account},
+    'EVM-lane account':identity.d};
+  state.guard.nativeIdentity = {chainId:typeof native.chainId==='string'?native.chainId:null,
+    getChainId:typeof native.getChainId,queryUsed:false};
+  update();
+  if (identity.classification==='UNRESOLVED') throw Error('UNRESOLVED: native address matches neither public-key derivation');
+  if (state.guard.nativeIdentity.chainId && state.guard.nativeIdentity.chainId!==chain) throw Error('Native provider reports a different chain ID');
+  state.guard.missing.shift();
+  const timed = async (read) => {
+    const start=performance.now();
+    try {return {value:await read(),ms:performance.now()-start};}
+    catch(error) {return {error:String(error),ms:performance.now()-start};}
+  };
+  const readAccount = async (address) => {
+    const [registry,balance,nonce]=await Promise.all([
+      timed(()=>keyStatus(address)), timed(()=>rpc('eth_getBalance',[address,'latest'])),
+      timed(()=>rpc('eth_getTransactionCount',[address,'latest']))]);
+    return {address,registry,balance,nonce};
+  };
+  const [signerRead,evmRead] = await Promise.all([readAccount(account),readAccount(identity.d)]);
+  state.laneIdentity.diana = {signer:signerRead,evm:evmRead};
+  const binding=signerRead.registry.value;
+  if (!binding?.registered) {
+    const error=signerRead.registry.error ?? 'Native signer is not PQC-registered on Diana';
+    gate(3,'BLOCKED',{binding, error,evidenceClass:'INDEPENDENT'});
+    throw Error(error);
+  }
+  if (binding.algorithmId!==1 || binding.keyBytes!==2592) {
+    gate(3,'BLOCKED',{binding,error:'Native signer registry does not contain a valid ML-DSA-87 key',evidenceClass:'INDEPENDENT'});
+    throw Error('Native signer registry does not contain a valid ML-DSA-87 key');
+  }
+  gate(3,'BLOCKED',{binding,error:'Awaiting S2 signature key comparison',evidenceClass:'INDEPENDENT'});
+  state.guard.missing.shift();
 
   async function recheck() {
-    const publicChain = await rpc('eth_chainId');
-    const latestEvm = await evmCall('eth_chainId');
-    const [latestAccount] = await evmCall('eth_accounts');
-    const latestKey = await nativeCall('getKey', [chain]);
-    if (publicChain !== diana.evmId || latestEvm !== publicChain
-        || (typeof native.chainId === 'string' && native.chainId !== chain)
-        || latestKey.bech32Address !== address || latestAccount?.toLowerCase() !== account.toLowerCase()
-        || crypto.qorAddressHex(latestKey.bech32Address).toLowerCase() !== account.toLowerCase()) {
-      state.guard.status = 'BLOCKED';
-      throw new Error('Diana network or selected account changed');
+    const publicChain=await rpc('eth_chainId');
+    const latestEvm=await evmCall('eth_chainId');
+    const latestKey=await nativeCall('getKey',[chain]);
+    if (publicChain!==diana.evmId || latestEvm!==publicChain
+        || (typeof native.chainId==='string' && native.chainId!==chain)
+        || latestKey.bech32Address!==address
+        || hexString(typeof latestKey.pubKey==='string'?base64(latestKey.pubKey):Uint8Array.from(latestKey.pubKey??[]))!==hexString(Uint8Array.from(key.pubKey))) {
+      state.guard.status='BLOCKED';
+      throw Error('Diana chain or native signer changed');
     }
   }
 
+  connecting = false;
   const suffix = prompt('Confirm the dedicated Diana account by typing the last six characters of ' + address);
   if (suffix !== address.slice(-6)) throw new Error('Address confirmation did not match');
+  state.guard.missing = [];
   state.guard.status = 'PASS';
   update();
   let first;
+  let s2Refused = false;
+  let liveChecks;
+  step('S4','NOT EXERCISED');
   try {
     if (typeof native.signArbitrary !== 'function' || native.signArbitrary.length !== 3) throw Error('Expected signArbitrary arity 3');
     await recheck();
@@ -117,17 +189,12 @@ export async function runWalletGates(state, version, update) {
     gate(1,status,info);
     step('S2',status,info);
   } catch (error) {
-    const info = {error:String(error),installedWarning:'QoreX: signArbitrary not yet supported'};
+    s2Refused = error?.walletRefused === true;
+    const info = {error:String(error),walletRefused:s2Refused,installedWarning:'QoreX: signArbitrary not yet supported'};
     gate(1,'BLOCKED',info); step('S2','BLOCKED',info);
   }
 
-  let binding;
-  try {
-    binding = await keyStatus(account);
-    gate(3, binding.registered ? 'BLOCKED' : 'FAIL', {evidenceClass:'INDEPENDENT', binding,
-      error: binding.registered ? 'Key comparison requires G2' : 'Diana EVM address has no registered PQC key'});
-  } catch (error) { gate(3, 'BLOCKED', {error:String(error)}); }
-  if (first?.pq?.signature && binding?.registered) {
+  if (first?.pq?.signature && binding?.registered && binding.algorithmId === 1 && binding.keyBytes === 2592) {
     try {
       const fixture = await (await fetch('./public-vectors.json')).json();
       const wrongKey = fixture.canonical.map((x) => hex(x.publicKey)).find((x) => hexString(x) !== binding.publicKey.slice(2));
@@ -148,6 +215,15 @@ export async function runWalletGates(state, version, update) {
         return results;
       };
       const independent = await measure(verifyPq);
+      const tamperedData = data.slice();
+      tamperedData[0] ^= 1;
+      liveChecks = [
+        {name:'valid',data:message,signature:first,expected:independent[0].valid},
+        {name:'tampered message',data:new TextDecoder().decode(tamperedData),signature:first,expected:independent[1].valid},
+        {name:'tampered signature',data:message,signature:{...first,pq:{...first.pq,
+          signature:btoa(String.fromCharCode(...cases[2].signature))}},expected:independent[2].valid},
+      ];
+      if (liveChecks.some(x=>typeof x.expected!=='boolean') || independent[0].valid!==true) liveChecks=undefined;
       const encodings = [{name:'UTF-8', valid:independent[0].valid}];
       for (const [name, decode] of [['base64',base64],['hex',hex]]) {
         try { encodings.push({name, valid:verifyPq(chainKey, framed(decode(message), chain), signature)}); }
@@ -168,30 +244,20 @@ export async function runWalletGates(state, version, update) {
   }
   try {
     if (typeof native.verifyArbitrary !== 'function' || native.verifyArbitrary.length !== 4) throw Error('Expected verifyArbitrary arity 4');
-    const vectors = await (await fetch('./public-vectors.json')).json();
-    const row = vectors.message.cases[0];
-    const data = hex(row.data);
-    const mutated = data.slice(); mutated[0] ^= 1;
-    const vectorKey = hex(vectors.canonical.find(x=>x.address===vectors.message.signer).publicKey);
-    const sig = base64(row.signature.pq.signature);
-    const tampered = sig.slice(); tampered[0] ^= 1;
-    const altered = {...row.signature,pq:{...row.signature.pq,signature:btoa(String.fromCharCode(...tampered))}};
+    if (!liveChecks) throw Error('Independently verified live S2 signature unavailable');
     const checks = [];
-    for (const item of [{name:'valid',data,sig,object:row.signature},
-      {name:'tampered message',data:mutated,sig,object:row.signature},
-      {name:'tampered signature',data,sig:tampered,object:altered}]) {
-      const expected = crypto.verifyPq(vectorKey,framed(item.data,vectors.chainId),item.sig);
+    for (const item of liveChecks) {
       try {
-        const valid = await nativeCall('verifyArbitrary',[vectors.chainId,vectors.message.signer,new TextDecoder().decode(item.data),item.object]);
-        checks.push({name:item.name,expected,valid});
-      } catch(error) { checks.push({name:item.name,expected,error:String(error)}); }
+        const valid = await nativeCall('verifyArbitrary',[chain,address,item.data,item.signature]);
+        checks.push({name:item.name,expected:item.expected,valid});
+      } catch(error) { checks.push({name:item.name,expected:item.expected,error:String(error)}); }
     }
     const mismatch = checks.some(x=>typeof x.valid==='boolean'&&x.valid!==x.expected);
     const status=mismatch?'FAIL':checks.every(x=>typeof x.valid==='boolean')?'PASS':'BLOCKED';
     const info={checks,evidenceClass:'WALLET-REPORTED',comparison:mismatch?'MISMATCH':undefined};
     gate(5,status,info);step('S3',status,info);
   } catch(error) {const info={error:String(error)};gate(5,'BLOCKED',info);step('S3','BLOCKED',info);}
-  try {
+  if (s2Refused) try {
     if (typeof native.signDirect!=='function' || native.signDirect.length!==2) throw Error('Expected signDirect arity 2');
     const doc = crypto.makeDirectDoc(address,key.pubKey);
     await recheck();
@@ -201,7 +267,7 @@ export async function runWalletGates(state, version, update) {
     const info={response,verified:checked,evidenceClass:checked.pq===true?'INDEPENDENT':'WALLET-REPORTED',broadcast:false};
     step('S4',checked.classical && checked.pq===true?'PASS':'FAIL',info);
     if (checked.pq === true) {
-      gate(3,'PASS',{binding,evidenceClass:'INDEPENDENT',matchedBy:'S4',keySha256:await hash(chainKey)});
+      state.s4IndependentPq = {keySha256:await hash(chainKey),evidenceClass:'INDEPENDENT',note:'S4 can establish C1 prime only. C2 requires S2.'};
     }
   } catch(error) { step('S4','BLOCKED',{error:String(error),broadcast:false}); }
 
@@ -220,7 +286,7 @@ export async function runWalletGates(state, version, update) {
     const req = {chainId:chain,messages:[encodeSelfTransfer(address)],memo:'qorelens-gate-g6',gasLimit:gas};
     await recheck();
     const before = await snapshot();
-    if (BigInt(before.balance) < minimumUqor * 1000000000000n) throw Error('Unified Diana balance below 60001 uqor reserve');
+    if (BigInt(before.balance) < minimumUqor * 1000000000000n) throw Error('Native signer Diana balance below 60001 uqor reserve');
     const result = await nativeCall('signAndBroadcast', [req], true, true);
     const sent = {result, before, observation:'not observed on Diana', hybrid:'Inferred from the chain rule for PQC-registered accounts; transaction signature layer was not inspected.'};
     if (/^(0x)?[0-9a-f]{64}$/i.test(result?.txHash)) sent.explorer = 'https://dashboard.qorechain.io/explorer/tx/' + result.txHash;
