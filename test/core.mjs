@@ -64,11 +64,11 @@ export async function testAddress() {
   assert.notEqual(identity.c, identity.d);
 }
 
-const distFetch = async (url, alter) =>
-  new Response(
-    (await read("dist/" + url.pathname.split("/").at(-1))) +
-      (alter ? "tampered" : ""),
-  );
+const distFetch = async (url, alter) => {
+  const bytes = await read("dist/" + url.pathname.split("/").at(-1));
+  if (alter) bytes[0] ^= 1;
+  return new Response(bytes);
+};
 export async function testReports() {
   const build = await verifyBuild("https://example.invalid/", (url) =>
     distFetch(url, false),

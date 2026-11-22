@@ -5,57 +5,125 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta
       http-equiv="Content-Security-Policy"
-      content="default-src 'self'; script-src 'self'; style-src 'self'; connect-src 'self' https://evm-testnet.qore.host; object-src 'none'; base-uri 'none'; form-action 'none'"
+      content="default-src 'none'; script-src 'self'; style-src 'self'; font-src 'self'; connect-src 'self' https://evm-testnet.qore.host; object-src 'none'; base-uri 'none'; form-action 'none'"
     />
     <title>QoreLens</title>
     <link rel="stylesheet" href="./app.css" />
   </head>
   <body>
-    <header><strong>QoreLens</strong><span>Diana · TESTNET</span></header>
-    <main>
-      <h1>Wallet capability evidence</h1>
-      <p>
-        QoreX on Diana only. Results are point-in-time. Chain reads use one
-        trusted public RPC.
-      </p>
-      <p>
-        Review each request. The session uses at most six approvals and can send
-        one 1 uqor self-transfer plus its fee.
-      </p>
-      <div class="actions">
-        <label>QoreX version <input id="version" autocomplete="off" /></label>
-        <button id="run">Run guided session</button>
-        <button id="vectors">Run verifier self-test</button>
-        <button id="probe">Read deployed probe</button>
+    <a class="skip" href="#main">Skip to evidence</a>
+    <header class="bar">
+      <strong>QoreLens</strong>
+      <span id="network-state" class="network"
+        >Diana · 0x2648 · awaiting guard</span
+      >
+      <span id="wallet-state" class="wallet">QoreX not checked</span>
+      <span class="testnet">TESTNET</span>
+    </header>
+    <div class="workspace">
+      <nav class="rail" aria-label="Evidence lenses">
+        <h2>Lenses</h2>
+        <ol id="rail"></ol>
+        <a href="#reports">Reports</a>
+      </nav>
+      <main id="main">
+        <section class="panel desktop" aria-labelledby="preflight">
+          <h1 id="preflight">Wallet capability evidence</h1>
+          <p>
+            QoreX on Diana only. Results are point-in-time. Chain reads use one
+            trusted public RPC.
+          </p>
+          <p>
+            At most six approvals. One 1 uqor self-transfer plus its fee.
+            Approve only requests for your Diana account.
+          </p>
+          <div class="actions">
+            <button id="run" class="primary">Run guided session</button>
+            <label
+              >QoreX version <input id="version" autocomplete="off"
+            /></label>
+            <button id="vectors">Run verifier self-test</button>
+            <button id="probe">Read deployed probe</button>
+          </div>
+          <p id="status" role="status">Checking the build fingerprint…</p>
+          <p id="signer" class="mono"></p>
+        </section>
+        <section class="desktop" aria-labelledby="matrix-title">
+          <h2 id="matrix-title">Capability matrix</h2>
+          <div
+            class="matrix-shell"
+            role="region"
+            aria-label="Capability matrix table"
+            tabindex="0"
+          >
+            <table>
+              <thead>
+                <tr>
+                  <th scope="col">Capability</th>
+                  <th scope="col">Advertised</th>
+                  <th scope="col">Observed</th>
+                  <th scope="col">Independent evidence</th>
+                  <th scope="col">Verdict</th>
+                </tr>
+              </thead>
+              <tbody id="matrix"></tbody>
+            </table>
+          </div>
+        </section>
+        <section class="panel" id="reports" aria-labelledby="report-title">
+          <h2 id="report-title">Reports</h2>
+          <p>
+            SHA-256 checks report integrity. Imported results stay separate from
+            live evidence.
+          </p>
+          <div class="actions">
+            <button id="json" class="desktop" disabled>Download JSON</button>
+            <button id="markdown" class="desktop" disabled>
+              Download Markdown
+            </button>
+            <label
+              >Import report <input id="import" type="file" accept=".json,.md"
+            /></label>
+          </div>
+          <p id="import-status" role="status"></p>
+          <pre
+            id="imported"
+            tabindex="0"
+            role="region"
+            aria-label="Imported evidence"
+          ></pre>
+          <details class="desktop">
+            <summary>Complete raw run</summary>
+            <pre id="raw" tabindex="0" role="region" aria-label="Raw run"></pre>
+          </details>
+        </section>
+      </main>
+    </div>
+    <dialog id="drawer" aria-labelledby="drawer-title">
+      <div class="dialog-head">
+        <h2 id="drawer-title">Evidence</h2>
+        <button id="drawer-close" type="button">Close</button>
       </div>
-      <p id="status" role="status">Checking the build fingerprint…</p>
-      <p id="signer"></p>
-      <table>
-        <thead>
-          <tr>
-            <th>Capability</th>
-            <th>Advertised</th>
-            <th>Observed</th>
-            <th>Independent evidence</th>
-            <th>Verdict</th>
-          </tr>
-        </thead>
-        <tbody id="matrix"></tbody>
-      </table>
-      <details>
-        <summary>Raw evidence</summary>
-        <pre id="raw"></pre>
-      </details>
+      <ul id="drawer-comparisons" aria-label="Verification comparisons"></ul>
+      <pre
+        id="drawer-data"
+        tabindex="0"
+        role="region"
+        aria-label="Raw lens evidence"
+      ></pre>
+      <button id="copy" type="button">Copy evidence</button>
+      <p id="copy-status" role="status"></p>
+    </dialog>
+    <dialog id="approval" aria-labelledby="approval-title">
+      <h2 id="approval-title">Review Diana wallet request</h2>
+      <pre id="approval-data" tabindex="0"></pre>
       <div class="actions">
-        <button id="json" disabled>Download JSON</button
-        ><button id="markdown" disabled>Download Markdown</button
-        ><label
-          >Import report <input id="import" type="file" accept=".json,.md"
-        /></label>
+        <button id="decline" type="button" autofocus>Decline</button
+        ><button id="approve" type="button" class="primary">
+          Continue to QoreX
+        </button>
       </div>
-      <p id="import-status" role="status"></p>
-      <pre id="imported"></pre>
-    </main>
+    </dialog>
     <script type="module" src="./app.js"></script>
   </body>
 </html>

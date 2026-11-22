@@ -7,6 +7,11 @@ const files = new Map([
   ["/app.js", "app.js"],
   ["/app.css", "app.css"],
   ["/build.json", "build.json"],
+  ["/fingerprint.json", "fingerprint.json"],
+  ["/verifier.js", "verifier.js"],
+  ...["plex-sans.woff2", "plex-sans-semibold.woff2", "plex-mono.woff2"].map(
+    (name) => ["/" + name, name],
+  ),
   ["/public-vectors.json", "public-vectors.json"],
 ]);
 const type = {
@@ -14,6 +19,7 @@ const type = {
   js: "text/javascript",
   css: "text/css",
   json: "application/json",
+  woff2: "font/woff2",
 };
 export async function startServer(port = 4400) {
   await readFile("dist/build.json");

@@ -23,6 +23,10 @@ export const lenses = [
   "Hybrid transaction",
   "Deployed probe",
   "Diana precompile",
+  "signDirect",
+  "eth_sendTransaction",
+  "wallet_sendCalls",
+  "Atomic calls",
 ];
 export const emptyMatrix = () =>
   Object.fromEntries(lenses.map((name) => [name, evidence("NOT EXERCISED")]));

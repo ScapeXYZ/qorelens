@@ -62,6 +62,24 @@ export async function runSession({
       svm: walletInfo.svm,
     }),
   );
+  for (const method of [
+    "signDirect",
+    "eth_sendTransaction",
+    "wallet_sendCalls",
+    "Atomic calls",
+  ]) {
+    const advertised = walletInfo.advertised.some(
+      (flag) =>
+        flag === method || (method === "Atomic calls" && /atomic/i.test(flag)),
+    );
+    set(
+      method,
+      evidence(advertised ? "ADVERTISED-ONLY" : "NOT EXERCISED", {
+        advertised,
+        observed: "Outside the exercised request surface",
+      }),
+    );
+  }
   const wrapper = probeEvidence().then((value) => set("Deployed probe", value));
   let guard = false;
   const request = async (

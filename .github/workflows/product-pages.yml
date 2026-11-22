@@ -22,7 +22,28 @@ jobs:
       - run: npm ci --ignore-scripts --no-audit --no-fund --before=2026-11-07T21:15:57.730Z
       - run: npm run lint
       - run: npm run format:check
+      - name: Verify build checkout
+        run: |
+          test "$(git rev-parse HEAD)" = "$GITHUB_SHA"
+          test -z "$(git status --porcelain --untracked-files=no)"
       - run: npm run build
+      - name: Verify build fingerprint provenance
+        run: |
+          node --input-type=module <<'JS'
+          import assert from "node:assert/strict";
+          import { createHash } from "node:crypto";
+          import { readFileSync } from "node:fs";
+
+          const build = JSON.parse(readFileSync("dist/fingerprint.json", "utf8"));
+          const sha256 = (file) => createHash("sha256").update(readFileSync(file)).digest("hex");
+          assert.match(build.commit, /^[a-f0-9]{40}$/);
+          assert.equal(build.commit, process.env.GITHUB_SHA);
+          assert.match(build.ciRunId, /^[0-9]+$/);
+          assert.equal(build.ciRunId, process.env.GITHUB_RUN_ID);
+          assert.equal(build.dirty, false);
+          assert.equal(build.bundleSha256, sha256("dist/app.js"));
+          assert.equal(build.verifierSha256, sha256("dist/verifier.js"));
+          JS
       - run: npm test
       - run: npx --no-install playwright install --with-deps chromium
       - run: npm run test:browser

@@ -1,3 +1,4 @@
+import { inspectWallet } from "../wallet/adapter.mjs";
 import { emptyMatrix } from "../lens/evidence.mjs";
 import { probeEvidence, runSession } from "../lens/session.mjs";
 import { selfTest } from "../verify/verdict.mjs";
@@ -23,24 +24,115 @@ let build;
 let vectors;
 let busy = false;
 let report;
+const drawer = element<HTMLDialogElement>("drawer");
+const approval = element<HTMLDialogElement>("approval");
+element("decline").onclick = () => approval.close("cancel");
+element("approve").onclick = () => approval.close("approve");
+const showEvidence = (name, row) => {
+  element("drawer-title").textContent = name;
+  element("drawer-data").textContent = JSON.stringify(row, null, 2);
+  const comparisons = element("drawer-comparisons");
+  comparisons.replaceChildren();
+  for (const check of row.checks ?? []) {
+    const item = document.createElement("li");
+    const observed = check.valid ?? check.observed;
+    item.textContent =
+      check.name +
+      ": " +
+      (typeof observed === "boolean"
+        ? observed
+          ? "accepted"
+          : "rejected"
+        : (check.error ?? "no result")) +
+      (typeof check.ms === "number" ? " · " + check.ms.toFixed(1) + " ms" : "");
+    comparisons.append(item);
+  }
+  element("copy-status").textContent = "";
+  if (!drawer.open) drawer.showModal();
+};
+element("drawer-close").onclick = () => drawer.close();
+element("copy").onclick = async () => {
+  try {
+    await navigator.clipboard.writeText(
+      element("drawer-data").textContent ?? "",
+    );
+    element("copy-status").textContent = "Evidence copied";
+  } catch (error) {
+    element("copy-status").textContent = String(error);
+  }
+};
+const consent = (payload) =>
+  new Promise<boolean>((resolve) => {
+    element("approval-data").textContent = JSON.stringify(payload, null, 2);
+    approval.returnValue = "cancel";
+    approval.addEventListener(
+      "close",
+      () => resolve(approval.returnValue === "approve"),
+      { once: true },
+    );
+    approval.showModal();
+  });
 const render = (run?) => {
   const body = element("matrix");
+  const rail = element("rail");
+  const current = document.activeElement?.getAttribute("data-lens");
   body.replaceChildren();
-  for (const [name, row] of Object.entries(matrix)) {
+  rail.replaceChildren();
+  Object.entries(matrix).forEach(([name, row], index) => {
+    const id = "lens-" + index;
     const tr = document.createElement("tr");
-    for (const value of [
-      name,
+    tr.id = id;
+    const heading = document.createElement("th");
+    heading.scope = "row";
+    const open = document.createElement("button");
+    open.type = "button";
+    open.textContent = name;
+    open.dataset.lens = id;
+    open.onclick = () => showEvidence(name, row);
+    heading.append(open);
+    tr.append(heading);
+    for (const [col, value] of [
       row.advertised ?? "—",
       row.observed ?? row.error ?? "—",
       row.evidenceClass ?? "—",
       row.verdict,
-    ]) {
+    ].entries()) {
       const td = document.createElement("td");
       td.textContent = String(value);
+      if (col === 3)
+        td.className =
+          "verdict " + row.verdict.toLowerCase().replaceAll(" ", "-");
       tr.append(td);
     }
     body.append(tr);
-  }
+    const entry = document.createElement("li");
+    const jump = document.createElement("a");
+    jump.href = "#" + id;
+    const label =
+      row.verdict === "VERIFIED"
+        ? "✓ "
+        : row.verdict === "MISMATCH" || row.verdict === "BLOCKED"
+          ? "× "
+          : "○ ";
+    jump.textContent = label + name;
+    jump.setAttribute("aria-label", name + ": " + row.verdict);
+    jump.title = row.verdict;
+    entry.append(jump);
+    rail.append(entry);
+    if (current === id) open.focus();
+  });
+  const guard = matrix["Network guard"];
+  element("network-state").textContent =
+    "Diana · 0x2648 · " +
+    (guard.verdict === "CHAIN-OBSERVED"
+      ? "guard passed"
+      : guard.verdict === "BLOCKED"
+        ? "guard blocked"
+        : "awaiting guard");
+  if (run?.wallet)
+    element("wallet-state").textContent = run.wallet.detected
+      ? "QoreX " + (run.wallet.version ?? "version unknown")
+      : "QoreX unavailable";
   element("raw").textContent = JSON.stringify(run ?? matrix, null, 2);
   if (run?.signer)
     element("signer").textContent =
@@ -83,10 +175,7 @@ actions[0].onclick = () =>
     const result = await runSession({
       vectors,
       version: version.value.trim(),
-      consent: (payload) =>
-        confirm(
-          "Diana testnet wallet request\n\n" + JSON.stringify(payload, null, 2),
-        ),
+      consent,
       confirmSigner: (signer) =>
         prompt("Type the last six characters of " + signer.bech32),
       update: (run) => {
@@ -138,11 +227,16 @@ element<HTMLInputElement>("import").onchange = async (event) => {
   }
 };
 actions.forEach((x) => (x.disabled = true));
-render();
+render({ wallet: inspectWallet() });
 try {
   build = await verifyBuild();
-  if (location.protocol === "https:" && build.dirty)
-    throw Error("Hosted wallet use requires a committed build");
+  if (
+    location.protocol === "https:" &&
+    (build.dirty || !build.ciRunId || !build.bundledFonts)
+  )
+    throw Error(
+      "Hosted wallet use requires a committed CI build with bundled fonts",
+    );
   vectors = JSON.parse(build.vectorText);
   delete build.vectorText;
   status.textContent = "Build verified · " + build.fingerprint.slice(0, 12);
