@@ -8,3 +8,11 @@ feasibility/evidence/qoresign-v1.json
 
 feasibility/toolchain/scaffold/
 feasibility/broadcast/
+
+/dist/
+/playwright-report/
+/test-results/
+
+/artifacts/
+/out/
+/cache/

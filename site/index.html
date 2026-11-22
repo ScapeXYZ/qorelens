@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'self'; script-src 'self'; style-src 'self'; connect-src 'self' https://evm-testnet.qore.host; object-src 'none'; base-uri 'none'; form-action 'none'"
+    />
+    <title>QoreLens</title>
+    <link rel="stylesheet" href="./app.css" />
+  </head>
+  <body>
+    <header><strong>QoreLens</strong><span>Diana · TESTNET</span></header>
+    <main>
+      <h1>Wallet capability evidence</h1>
+      <p>
+        QoreX on Diana only. Results are point-in-time. Chain reads use one
+        trusted public RPC.
+      </p>
+      <p>
+        Review each request. The session uses at most six approvals and can send
+        one 1 uqor self-transfer plus its fee.
+      </p>
+      <div class="actions">
+        <label>QoreX version <input id="version" autocomplete="off" /></label>
+        <button id="run">Run guided session</button>
+        <button id="vectors">Run verifier self-test</button>
+        <button id="probe">Read deployed probe</button>
+      </div>
+      <p id="status" role="status">Checking the build fingerprint…</p>
+      <p id="signer"></p>
+      <table>
+        <thead>
+          <tr>
+            <th>Capability</th>
+            <th>Advertised</th>
+            <th>Observed</th>
+            <th>Independent evidence</th>
+            <th>Verdict</th>
+          </tr>
+        </thead>
+        <tbody id="matrix"></tbody>
+      </table>
+      <details>
+        <summary>Raw evidence</summary>
+        <pre id="raw"></pre>
+      </details>
+      <div class="actions">
+        <button id="json" disabled>Download JSON</button
+        ><button id="markdown" disabled>Download Markdown</button
+        ><label
+          >Import report <input id="import" type="file" accept=".json,.md"
+        /></label>
+      </div>
+      <p id="import-status" role="status"></p>
+      <pre id="imported"></pre>
+    </main>
+    <script type="module" src="./app.js"></script>
+  </body>
+</html>
