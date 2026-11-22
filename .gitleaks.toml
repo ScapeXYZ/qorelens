@@ -1,0 +1,12 @@
+# Keep the default rules enabled. This exception covers one public registry-key digest.
+# The acceptance manifest records how it was recomputed and matched to all six findings.
+[extend]
+useDefault = true
+
+[[allowlists]]
+description = "Exact public ML-DSA-87 registry-key digest in recorded Session A evidence"
+targetRules = ["generic-api-key"]
+condition = "AND"
+regexTarget = "secret"
+paths = ['(?:^|[\\/])evidence[\\/](?:acceptance-manifest\.json|rc2-session-a\.(?:json|md))$']
+regexes = ['^7e3e2a9c96b62f6e5482d6e8a8edcf6a2defee6b1af89a1eab5d0953b75f0604$']

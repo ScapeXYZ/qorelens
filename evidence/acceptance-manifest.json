@@ -1,0 +1,67 @@
+{
+  "release": {
+    "tag": "v1.0.0",
+    "commit": "613335b03e1c95b587a67fada29031ed415e17de",
+    "ciRunId": "45053626379",
+    "pagesUrl": "https://scapexyz.github.io/qorelens/",
+    "fingerprint": "c0384c3b74aa4495e8d221058d85a68db23f2c250e3664c362a7385be28e4fb4",
+    "bundleSha256": "014ea592456d5a74a989f3f9da0158afb6609defebc7e7c950fc1f61544daa60",
+    "verifierSha256": "d0cc5b65b102fca63b8c8853d256cd3a49cc4a023d7ee869ef1a3c6a1e6031f1",
+    "workflowFreezeRun": 45064779489
+  },
+  "phase0": {
+    "status": "historical, replayed",
+    "limitation": "The original export has no digest or commit for the bytes loaded by localhost Chrome. The replay hash identifies the tested artifact and cannot be attributed retroactively to the signing session."
+  },
+  "probe": {
+    "address": "0x05d2c199925e43767b79a6564542de75fa03f0c5",
+    "transaction": "0x54029f6dca0b82dbde7a5de5325c5ca9bc88914d46cb17276e6ffdefd58ae36a",
+    "block": 10516811
+  },
+  "rc1": {
+    "sessionA": {
+      "status": "superseded, historical",
+      "transaction": "B839B613A4A1A386730C5B279B41C954C40E81EFB53C9371498EB622C9AB2C91",
+      "block": 10559088
+    },
+    "sessionB": {
+      "status": "superseded, historical",
+      "scope": "Unregistered-account safety check; no transaction"
+    }
+  },
+  "rc2": {
+    "sessionA": {
+      "status": "PASS",
+      "qorex": "v0.4.3",
+      "approvals": 4,
+      "reportFiles": ["rc2-session-a.json", "rc2-session-a.md"],
+      "exportSha256": {
+        "json": "615502e347fda1d51e413dd2d3794baa809c3874577fb8b9a62fc64ad6f02717",
+        "md": "4623822e2c214c5636c64f0db9562fd32400aa80ec9c7f9e3ed49ce8762885a5"
+      },
+      "canonicalReportSha256": "7f6fee560a9a9d0fd71cc0c95b28f91721d5092a63a92bdd5c1f05683fb79d3c",
+      "signerRegistry": {
+        "registered": true,
+        "algorithmId": 1,
+        "keyBytes": 2592,
+        "possessionProven": true
+      },
+      "transaction": "AD56AC8AEAC810C7393C96AD9CD31C55DDDC7ECD3C9C7F96BF6F03D653956E0A",
+      "block": 10570113,
+      "code": 0,
+      "amountUqor": 1,
+      "feeUqor": 60000,
+      "nonceBefore": 5,
+      "nonceAfter": 6,
+      "verdict": "CHAIN-OBSERVED",
+      "hybridSigning": "Inferred from chain-reported PQC evidence",
+      "keySha256": "7e3e2a9c96b62f6e5482d6e8a8edcf6a2defee6b1af89a1eab5d0953b75f0604",
+      "keySha256Verification": {
+        "description": "SHA-256 digest of the public chain-read ML-DSA-87 registry key (2,592 bytes); public, not a secret.",
+        "method": "Hex-decode results[\"Key binding\"].binding.publicKey after removing the 0x prefix; compute SHA-256 over the 2,592 decoded bytes.",
+        "origin": "Diana pqcKeyStatus registry response for the native signer, saved in the original rc2 Session A exports.",
+        "comparison": "The recomputed digest equals keySha256 in Key binding, Message signing, and Tamper controls in both the staged JSON and the Markdown embedded JSON, covering all six findings."
+      }
+    }
+  }
+}
