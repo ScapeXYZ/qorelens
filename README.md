@@ -71,6 +71,8 @@ evidence stays separate from live results. See [Security](SECURITY.md).
 
 ## Limitations
 
+Best viewed at desktop widths (1024 px or more). On narrower screens the matrix scrolls horizontally and the Verdict column may need scrolling.
+
 - Testnet only. The recorded behavior is tied to QoreX v0.4.3.
 - The native and EVM addresses in Session A are `DISTINCT_BY_DERIVATION`.
   The native lane did not expose a chain query in that session.

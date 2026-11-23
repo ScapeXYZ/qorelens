@@ -10,6 +10,8 @@ Your export is a report of YOUR session. The recorded Session A evidence lives i
 
 ## Steps
 
+Best viewed at desktop widths (1024 px or more). On narrower screens the matrix scrolls horizontally and the Verdict column may need scrolling.
+
 1. **Open hosted QoreLens.** Use a fresh desktop Chrome profile (no local setup is needed). Start a timer and open
    [QoreLens](https://scapexyz.github.io/qorelens/). Expect **Build verified ·
    c0384c3b74aa**. Stop on a mismatch.
