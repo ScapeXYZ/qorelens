@@ -30,6 +30,16 @@ element("decline").onclick = () => approval.close("cancel");
 element("approve").onclick = () => approval.close("approve");
 const showEvidence = (name, row) => {
   element("drawer-title").textContent = name;
+  element("drawer-verdict").textContent = "Verdict · " + row.verdict;
+  element<HTMLDetailsElement>("drawer-raw").open = false;
+  const hasControls =
+    (name === "Message signing" || name === "Tamper controls") &&
+    row.checks?.length > 1;
+  const expectations = element("drawer-expectations");
+  expectations.hidden = !hasControls;
+  expectations.textContent = hasControls
+    ? "The original signature should be accepted. Modified inputs should be rejected."
+    : "";
   element("drawer-data").textContent = JSON.stringify(row, null, 2);
   const comparisons = element("drawer-comparisons");
   comparisons.replaceChildren();
@@ -221,6 +231,29 @@ element<HTMLInputElement>("import").onchange = async (event) => {
   try {
     if (file.size > 2_000_000) throw Error("Report exceeds import limit");
     const imported = await importReport(await file.text());
+    element("recorded-source").textContent = file.name;
+    const rows = element("recorded-results");
+    rows.replaceChildren();
+    for (const name of [
+      "Verifier self-test",
+      "Message signing",
+      "Tamper controls",
+      "Key binding",
+      "Hybrid transaction",
+    ]) {
+      const row = imported.results[name];
+      if (typeof row?.verdict !== "string") continue;
+      const item = document.createElement("li");
+      const verdict = document.createElement("strong");
+      verdict.textContent = row.verdict;
+      item.append(name + " · ", verdict);
+      if (typeof row.reason === "string" && row.reason.trim())
+        item.append(" — " + row.reason);
+      rows.append(item);
+    }
+    rows.hidden = !rows.childElementCount;
+    element("recorded-session").hidden = false;
+    element<HTMLDetailsElement>("imported-raw").open = false;
     element("import-status").textContent =
       "Imported evidence · hash valid · author and build provenance unverified" +
       (imported.schema === "qorelens-report-v1"
@@ -233,6 +266,7 @@ element<HTMLInputElement>("import").onchange = async (event) => {
   } catch (error) {
     element("import-status").textContent = String(error);
     element("imported").textContent = "";
+    element("recorded-session").hidden = true;
   }
 };
 actions.forEach((x) => (x.disabled = true));

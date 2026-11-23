@@ -14,6 +14,7 @@
     <a class="skip" href="#main">Skip to evidence</a>
     <header class="bar">
       <strong>QoreLens</strong>
+      <span class="session-label">Current session</span>
       <span id="network-state" class="network"
         >Diana · 0x2648 · awaiting guard</span
       >
@@ -74,7 +75,7 @@
           <h2 id="report-title">Reports</h2>
           <p>
             SHA-256 checks report integrity. Imported results stay separate from
-            live evidence.
+            the current session above. No wallet is needed to view a report.
           </p>
           <div class="actions">
             <button id="json" class="desktop" disabled>Download JSON</button>
@@ -86,12 +87,24 @@
             /></label>
           </div>
           <p id="import-status" role="status"></p>
-          <pre
-            id="imported"
-            tabindex="0"
-            role="region"
-            aria-label="Imported evidence"
-          ></pre>
+          <section
+            id="recorded-session"
+            aria-labelledby="recorded-title"
+            hidden
+          >
+            <h3 id="recorded-title">Recorded session</h3>
+            <p id="recorded-source"></p>
+            <ul id="recorded-results"></ul>
+            <details id="imported-raw">
+              <summary>Raw imported JSON</summary>
+              <pre
+                id="imported"
+                tabindex="0"
+                role="region"
+                aria-label="Imported evidence"
+              ></pre>
+            </details>
+          </section>
           <details class="desktop">
             <summary>Complete raw run</summary>
             <pre id="raw" tabindex="0" role="region" aria-label="Raw run"></pre>
@@ -104,13 +117,18 @@
         <h2 id="drawer-title">Evidence</h2>
         <button id="drawer-close" type="button">Close</button>
       </div>
+      <p id="drawer-verdict" class="verdict"></p>
+      <p id="drawer-expectations" hidden></p>
       <ul id="drawer-comparisons" aria-label="Verification comparisons"></ul>
-      <pre
-        id="drawer-data"
-        tabindex="0"
-        role="region"
-        aria-label="Raw lens evidence"
-      ></pre>
+      <details id="drawer-raw">
+        <summary>Raw lens evidence</summary>
+        <pre
+          id="drawer-data"
+          tabindex="0"
+          role="region"
+          aria-label="Raw lens evidence"
+        ></pre>
+      </details>
       <button id="copy" type="button">Copy evidence</button>
       <p id="copy-status" role="status"></p>
     </dialog>

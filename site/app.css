@@ -69,6 +69,9 @@ a {
 .bar strong {
   font-size: 1.25rem;
 }
+.session-label {
+  font-weight: 600;
+}
 .network,
 .wallet {
   color: var(--muted);
@@ -194,6 +197,29 @@ tbody th button {
   width: 100%;
   text-align: left;
 }
+.matrix-shell th:nth-child(4),
+.matrix-shell th:nth-child(5) {
+  min-width: 9rem;
+}
+.matrix-shell td:nth-child(4),
+.matrix-shell td:nth-child(5) {
+  overflow-wrap: normal;
+  white-space: nowrap;
+}
+#recorded-session {
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--line);
+}
+#recorded-title {
+  margin: 0;
+}
+#recorded-source {
+  overflow-wrap: anywhere;
+}
+#recorded-results {
+  padding-left: 1.25rem;
+}
 .verdict {
   font-weight: 600;
 }
@@ -236,6 +262,18 @@ tr[id] {
 @media (max-width: 850px) {
   .workspace {
     grid-template-columns: minmax(9rem, 10rem) minmax(0, 1fr);
+  }
+  .matrix-shell tbody th {
+    min-width: 8rem;
+  }
+  .matrix-shell th:nth-child(3),
+  .matrix-shell th:nth-child(4),
+  .matrix-shell th:nth-child(5) {
+    min-width: 7rem;
+  }
+  .matrix-shell td:nth-child(4),
+  .matrix-shell td:nth-child(5) {
+    white-space: normal;
   }
 }
 @media (max-width: 680px) {
