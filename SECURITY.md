@@ -24,3 +24,5 @@ private keys, and mnemonics from evidence and public issues.
 
 Use [GitHub private vulnerability reporting](https://github.com/ScapeXYZ/qorelens/security/advisories/new) if enabled. Otherwise contact the repository maintainer privately.
 Include the affected release, reproducible observations, and redacted evidence.
+
+The rejected UI candidate is outside this submission.

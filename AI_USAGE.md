@@ -14,3 +14,5 @@ directed the work, performed the live wallet sessions, and reviewed the evidence
 Workflow: the human selected the product and set evidence gates. Wallet sessions and host checks were run by the human. The repository contains evidence from real wallet sessions, saved chain responses, automated fixture tests, and explicitly labeled historical replays. AI-assisted documentation summarizes these sources; it does not replace the underlying evidence. AI-written statements were checked against saved evidence before publication, and Phase 0 evidence is described as replayed.
 
 These documents were drafted with AI and reviewed by the human.
+
+The rejected UI candidate is outside this submission.

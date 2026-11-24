@@ -10,6 +10,8 @@ Your export is a report of YOUR session. The recorded Session A evidence lives i
 
 ## Steps
 
+Allow about five minutes.
+
 Best viewed at desktop widths (1024 px or more). On narrower screens the matrix scrolls horizontally and the Verdict column may need scrolling.
 
 1. **Open hosted QoreLens.** Use a fresh desktop Chrome profile (no local setup is needed). Start a timer and open
@@ -23,9 +25,9 @@ Best viewed at desktop widths (1024 px or more). On narrower screens the matrix 
 4. **Try report exchange.** Download JSON and Markdown from **Reports**,
    import each with **Import report**, and check the integrity status. Leave
    **Run guided session** untouched. No wallet extension is required.
-5. **Read recorded Session A.** Import the [original JSON](evidence/rc2-session-a.json)
-   and [Markdown](evidence/rc2-session-a.md). Note the difference. Compare **VERIFIED** and **CHAIN-OBSERVED**. Use the
-   [transaction explorer](https://dashboard.qorechain.io/explorer/tx/AD56AC8AEAC810C7393C96AD9CD31C55DDDC7ECD3C9C7F96BF6F03D653956E0A)
+5. **Read the recorded demo.** Import the [demo JSON](https://github.com/ScapeXYZ/qorelens/raw/master/evidence/video-session.json)
+   or [Markdown](https://github.com/ScapeXYZ/qorelens/raw/master/evidence/video-session.md). Expect an integrity match and the frozen build. Compare with the [screenshots](README.md#screenshots). Note the difference. QoreLens independently verifies only the message signature (**VERIFIED**). The transaction is **CHAIN-OBSERVED**. Use the
+   [transaction explorer](https://dashboard.qorechain.io/explorer/tx/5216F3E05807BDEBD8E843E831635FE60316D294FE94DE03690F3C5D520D8DDE)
    and [acceptance manifest](evidence/acceptance-manifest.json) to compare the
    transfer amount and fee.
 6. **Record observations.** Stop the timer and complete the form.

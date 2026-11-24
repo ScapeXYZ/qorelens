@@ -34,7 +34,10 @@
       "status": "PASS",
       "qorex": "v0.4.3",
       "approvals": 4,
-      "reportFiles": ["rc2-session-a.json", "rc2-session-a.md"],
+      "reportFiles": [
+        "rc2-session-a.json",
+        "rc2-session-a.md"
+      ],
       "exportSha256": {
         "json": "615502e347fda1d51e413dd2d3794baa809c3874577fb8b9a62fc64ad6f02717",
         "md": "4623822e2c214c5636c64f0db9562fd32400aa80ec9c7f9e3ed49ce8762885a5"
@@ -61,6 +64,51 @@
         "method": "Hex-decode results[\"Key binding\"].binding.publicKey after removing the 0x prefix; compute SHA-256 over the 2,592 decoded bytes.",
         "origin": "Diana pqcKeyStatus registry response for the native signer, saved in the original rc2 Session A exports.",
         "comparison": "The recomputed digest equals keySha256 in Key binding, Message signing, and Tamper controls in both the staged JSON and the Markdown embedded JSON, covering all six findings."
+      }
+    },
+    "demo-video session, v1.0.0": {
+      "label": "demo-video session, v1.0.0",
+      "recordedEvidence": "REPORT INTEGRITY, FROZEN BUILD MATCH AND INDEPENDENT CHAIN READS CONFIRMED",
+      "reports": [
+        "video-session.json",
+        "video-session.md"
+      ],
+      "fileSha256": {
+        "json": "320c6ba9a3c89c601feac244ec6c6e49ad934ee0d91db64aa9a2bfc8a3acc396",
+        "md": "be1dd8822cf6c7add9a3504e7af7f386088803479f6964b2dbac8e0910387fdc"
+      },
+      "canonicalReportSha256": "6dfebd3df958566bd0e8595608390cca0594956c0a055938ec04e339c26fb056",
+      "build": {
+        "commit": "613335b03e1c95b587a67fada29031ed415e17de",
+        "fingerprint": "c0384c3b74aa4495e8d221058d85a68db23f2c250e3664c362a7385be28e4fb4",
+        "ciRunId": "45053626379"
+      },
+      "messageSigning": {
+        "verdict": "VERIFIED",
+        "checks": "Independent offline replay against the saved chain-read key accepted the signature and rejected five negative controls."
+      },
+      "transaction": {
+        "hash": "5216F3E05807BDEBD8E843E831635FE60316D294FE94DE03690F3C5D520D8DDE",
+        "block": 10625585,
+        "code": 0,
+        "signer": "qor1ylgewp0h038mrnslyte4yst20q0zwdhqs7fujv",
+        "nonceBefore": 6,
+        "nonceAfter": 7,
+        "verdict": "CHAIN-OBSERVED",
+        "source": "Saved export: wallet hash, block and code; recorded EVM signer-state snapshots.",
+        "independentHostRpc": {
+          "status": "PASS",
+          "evidence": "video-session-rpc-verification.json",
+          "code": 0,
+          "block": 10625585,
+          "gasUsed": 167527,
+          "amountUqor": 1,
+          "feeUqor": 60000,
+          "nonceBefore": 6,
+          "nonceAfter": 7,
+          "pqcEvent": "pqc_hybrid_verify status=verified (chain-reported)",
+          "verification": "Saved raw responses independently replayed. Transaction signature bytes and signing preimages were not independently verified."
+        }
       }
     }
   }

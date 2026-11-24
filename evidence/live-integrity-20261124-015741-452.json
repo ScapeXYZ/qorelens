@@ -1,0 +1,113 @@
+﻿{
+    "utc":  "2026-11-24T01:57:41.4528855Z",
+    "baseUrl":  "https://scapexyz.github.io/qorelens/",
+    "status":  "PASS",
+    "expected":  {
+                     "commit":  "613335b03e1c95b587a67fada29031ed415e17de",
+                     "fingerprint":  "c0384c3b74aa4495e8d221058d85a68db23f2c250e3664c362a7385be28e4fb4",
+                     "bundleSha256":  "014ea592456d5a74a989f3f9da0158afb6609defebc7e7c950fc1f61544daa60",
+                     "verifierSha256":  "d0cc5b65b102fca63b8c8853d256cd3a49cc4a023d7ee869ef1a3c6a1e6031f1"
+                 },
+    "assets":  [
+                   {
+                       "path":  "index.html",
+                       "bytes":  4844,
+                       "sha256":  "8550ee7d9445573b2482ffb3e95f0b46b162035e68bc8c21feaf43e518cb2eee",
+                       "manifestSha256":  "8550ee7d9445573b2482ffb3e95f0b46b162035e68bc8c21feaf43e518cb2eee",
+                       "frozenSha256":  "8550ee7d9445573b2482ffb3e95f0b46b162035e68bc8c21feaf43e518cb2eee",
+                       "matches":  true
+                   },
+                   {
+                       "path":  "app.js",
+                       "bytes":  107182,
+                       "sha256":  "014ea592456d5a74a989f3f9da0158afb6609defebc7e7c950fc1f61544daa60",
+                       "manifestSha256":  "014ea592456d5a74a989f3f9da0158afb6609defebc7e7c950fc1f61544daa60",
+                       "frozenSha256":  "014ea592456d5a74a989f3f9da0158afb6609defebc7e7c950fc1f61544daa60",
+                       "matches":  true
+                   },
+                   {
+                       "path":  "app.css",
+                       "bytes":  4279,
+                       "sha256":  "93d010d7663eb7ceacdf2dbff5a5fbfa5f5589eaaf70066dab128acff31596ea",
+                       "manifestSha256":  "93d010d7663eb7ceacdf2dbff5a5fbfa5f5589eaaf70066dab128acff31596ea",
+                       "frozenSha256":  "93d010d7663eb7ceacdf2dbff5a5fbfa5f5589eaaf70066dab128acff31596ea",
+                       "matches":  true
+                   },
+                   {
+                       "path":  "verifier.js",
+                       "bytes":  96886,
+                       "sha256":  "d0cc5b65b102fca63b8c8853d256cd3a49cc4a023d7ee869ef1a3c6a1e6031f1",
+                       "manifestSha256":  "d0cc5b65b102fca63b8c8853d256cd3a49cc4a023d7ee869ef1a3c6a1e6031f1",
+                       "frozenSha256":  "d0cc5b65b102fca63b8c8853d256cd3a49cc4a023d7ee869ef1a3c6a1e6031f1",
+                       "matches":  true
+                   },
+                   {
+                       "path":  "public-vectors.json",
+                       "bytes":  69599,
+                       "sha256":  "8444b1c39b5f4b2419055d704288656989193c80ac5e104adfb109242d15674e",
+                       "manifestSha256":  "8444b1c39b5f4b2419055d704288656989193c80ac5e104adfb109242d15674e",
+                       "frozenSha256":  "8444b1c39b5f4b2419055d704288656989193c80ac5e104adfb109242d15674e",
+                       "matches":  true
+                   },
+                   {
+                       "path":  "plex-sans.woff2",
+                       "bytes":  22588,
+                       "sha256":  "3b646991d30055a93a4ecc499713d4347953a74a947ecab435ab72070cbdab0e",
+                       "manifestSha256":  "3b646991d30055a93a4ecc499713d4347953a74a947ecab435ab72070cbdab0e",
+                       "frozenSha256":  "3b646991d30055a93a4ecc499713d4347953a74a947ecab435ab72070cbdab0e",
+                       "matches":  true
+                   },
+                   {
+                       "path":  "plex-sans-semibold.woff2",
+                       "bytes":  24252,
+                       "sha256":  "8960851d691c054ed38e259bdcf1a6190d157b4203ed5bb32c632a863fb8ec2f",
+                       "manifestSha256":  "8960851d691c054ed38e259bdcf1a6190d157b4203ed5bb32c632a863fb8ec2f",
+                       "frozenSha256":  "8960851d691c054ed38e259bdcf1a6190d157b4203ed5bb32c632a863fb8ec2f",
+                       "matches":  true
+                   },
+                   {
+                       "path":  "plex-mono.woff2",
+                       "bytes":  14812,
+                       "sha256":  "3c5a451f9ec27a354b0c2bcca636c6ec17a651281aabf29f8427e210a1d31e85",
+                       "manifestSha256":  "3c5a451f9ec27a354b0c2bcca636c6ec17a651281aabf29f8427e210a1d31e85",
+                       "frozenSha256":  "3c5a451f9ec27a354b0c2bcca636c6ec17a651281aabf29f8427e210a1d31e85",
+                       "matches":  true
+                   }
+               ],
+    "manifestSha256":  "555f13f287ca687f5b9634b1947acfde4cdf7ad7f1a12254f29f13b99bef0c11",
+    "manifest":  {
+                     "schema":  "qorelens-build-v2",
+                     "commit":  "613335b03e1c95b587a67fada29031ed415e17de",
+                     "dirty":  false,
+                     "ciRunId":  "45053626379",
+                     "buildTimestamp":  "2026-11-22T18:11:30.992Z",
+                     "bundleSha256":  "014ea592456d5a74a989f3f9da0158afb6609defebc7e7c950fc1f61544daa60",
+                     "verifierSha256":  "d0cc5b65b102fca63b8c8853d256cd3a49cc4a023d7ee869ef1a3c6a1e6031f1",
+                     "dependencyVersions":  {
+                                                "@noble/post-quantum":  "0.7.1",
+                                                "@noble/curves":  "2.4.0",
+                                                "@noble/hashes":  "2.4.0",
+                                                "@scure/base":  "2.4.0",
+                                                "cosmjs-types":  "0.11.0",
+                                                "@fontsource/ibm-plex-sans":  "5.2.5",
+                                                "@fontsource/ibm-plex-mono":  "5.2.5",
+                                                "esbuild":  "0.25.12",
+                                                "vitest":  "4.1.12",
+                                                "@playwright/test":  "1.55.1",
+                                                "prettier":  "3.5.3",
+                                                "axe-core":  "4.10.3"
+                                            },
+                     "files":  {
+                                   "index.html":  "8550ee7d9445573b2482ffb3e95f0b46b162035e68bc8c21feaf43e518cb2eee",
+                                   "app.js":  "014ea592456d5a74a989f3f9da0158afb6609defebc7e7c950fc1f61544daa60",
+                                   "app.css":  "93d010d7663eb7ceacdf2dbff5a5fbfa5f5589eaaf70066dab128acff31596ea",
+                                   "verifier.js":  "d0cc5b65b102fca63b8c8853d256cd3a49cc4a023d7ee869ef1a3c6a1e6031f1",
+                                   "public-vectors.json":  "8444b1c39b5f4b2419055d704288656989193c80ac5e104adfb109242d15674e",
+                                   "plex-sans.woff2":  "3b646991d30055a93a4ecc499713d4347953a74a947ecab435ab72070cbdab0e",
+                                   "plex-sans-semibold.woff2":  "8960851d691c054ed38e259bdcf1a6190d157b4203ed5bb32c632a863fb8ec2f",
+                                   "plex-mono.woff2":  "3c5a451f9ec27a354b0c2bcca636c6ec17a651281aabf29f8427e210a1d31e85"
+                               },
+                     "bundledFonts":  true,
+                     "fingerprint":  "c0384c3b74aa4495e8d221058d85a68db23f2c250e3664c362a7385be28e4fb4"
+                 }
+}

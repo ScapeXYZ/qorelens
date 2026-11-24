@@ -8,5 +8,5 @@ description = "Exact public ML-DSA-87 registry-key digest in recorded Session A 
 targetRules = ["generic-api-key"]
 condition = "AND"
 regexTarget = "secret"
-paths = ['(?:^|[\\/])evidence[\\/](?:acceptance-manifest\.json|rc2-session-a\.(?:json|md))$']
+paths = ['(?:^|[\\/])evidence[\\/](?:acceptance-manifest\.json|rc2-session-a\.(?:json|md)|video-session\.(?:json|md))$']
 regexes = ['^7e3e2a9c96b62f6e5482d6e8a8edcf6a2defee6b1af89a1eab5d0953b75f0604$']

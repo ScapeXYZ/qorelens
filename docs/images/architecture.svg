@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="690" viewBox="0 0 1000 690" role="img" aria-labelledby="title">
+  <title id="title">QoreLens browser, wallet and testnet architecture</title>
+  <defs>
+    <style>text{fill:#E6EAF0;font:18px Plex,Arial,sans-serif}.label{fill:#B9C3D1;font-size:17px}.panel{fill:#151A21;stroke:#8B95A5}.link{stroke:#8B95A5;fill:none;stroke-width:2}</style>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L10 5 0 10Z" fill="#8B95A5"/></marker>
+  </defs>
+  <rect width="1000" height="690" fill="#0E1116"/>
+  <rect class="panel" x="32" y="38" width="372" height="450" rx="8"/>
+  <text x="54" y="76">Browser app · UI and lenses</text>
+  <text x="54" y="140">Independent ML-DSA-87 verifier</text>
+  <text class="label" x="54" y="165">verifyMessage · five tamper controls</text>
+  <text x="54" y="218">Report generator and importer</text>
+  <text class="label" x="54" y="243">createReport · importReport</text>
+  <text x="54" y="296">Build-fingerprint check</text>
+  <text class="label" x="54" y="321">verifyBuild</text>
+  <rect class="panel" x="565" y="38" width="403" height="193" rx="8"/>
+  <text x="587" y="75">QoreX extension</text>
+  <text x="587" y="111">Native lane</text>
+  <text class="label" x="587" y="137">getKey · signArbitrary · signAndBroadcast</text>
+  <text x="587" y="175">EVM lane</text>
+  <text class="label" x="587" y="201">eth_chainId · eth_accounts</text>
+  <path class="link" marker-end="url(#arrow)" d="M404 134H565"/>
+  <path class="link" marker-end="url(#arrow)" d="M404 198H565"/>
+  <rect class="panel" x="565" y="280" width="403" height="208" rx="8"/>
+  <text x="587" y="316">Diana testnet · EVM JSON-RPC</text>
+  <text class="label" x="587" y="353">eth_call · PQC key status</text>
+  <text class="label" x="587" y="380">eth_call · direct pqcVerify precompile</text>
+  <text class="label" x="587" y="407">eth_call · deployed probe read</text>
+  <text class="label" x="587" y="445">eth_getTransactionCount · eth_getBalance</text>
+  <path class="link" marker-end="url(#arrow)" d="M404 380H565"/>
+  <rect class="panel" stroke-dasharray="6 5" x="32" y="532" width="372" height="116" rx="8"/>
+  <text x="54" y="565">Host-side checks</text>
+  <text class="label" x="54" y="592">Outside the browser app</text>
+  <text class="label" x="54" y="619">Native transaction and event reads</text>
+  <rect class="panel" stroke-dasharray="6 5" x="565" y="532" width="403" height="116" rx="8"/>
+  <text x="587" y="565">Diana native REST / RPC</text>
+  <text class="label" x="587" y="592">Browser requests encounter CORS limits</text>
+  <text class="label" x="587" y="619">Host verifier uses native RPC</text>
+  <path class="link" stroke-dasharray="5 4" marker-end="url(#arrow)" d="M404 590H565"/>
+</svg>

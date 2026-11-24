@@ -1,0 +1,201 @@
+{
+  "status": "PASS",
+  "checks": {
+    "nativeChain": {
+      "status": "PASS"
+    },
+    "evmChain": {
+      "status": "PASS"
+    },
+    "transactionInclusion": {
+      "status": "PASS",
+      "details": {
+        "hash": "5216F3E05807BDEBD8E843E831635FE60316D294FE94DE03690F3C5D520D8DDE",
+        "height": 10625585,
+        "code": 0,
+        "gasUsed": "167527"
+      }
+    },
+    "messageAndFee": {
+      "status": "PASS",
+      "details": {
+        "signer": "qor1ylgewp0h038mrnslyte4yst20q0zwdhqs7fujv",
+        "recipient": "qor1ylgewp0h038mrnslyte4yst20q0zwdhqs7fujv",
+        "amount": [
+          {
+            "denom": "uqor",
+            "amount": "1"
+          }
+        ],
+        "memo": "qorelens-gate-g6",
+        "fee": [
+          {
+            "denom": "uqor",
+            "amount": "60000"
+          }
+        ],
+        "feeEvents": [
+          {
+            "fee": "60000uqor",
+            "fee_payer": "qor1ylgewp0h038mrnslyte4yst20q0zwdhqs7fujv"
+          }
+        ],
+        "pqcEvents": [
+          {
+            "type": "pqc_verify",
+            "attributes": [
+              {
+                "key": "address",
+                "value": "qor1ylgewp0h038mrnslyte4yst20q0zwdhqs7fujv",
+                "index": true
+              },
+              {
+                "key": "key_type",
+                "value": "hybrid",
+                "index": true
+              },
+              {
+                "key": "algorithm_id",
+                "value": "dilithium5",
+                "index": true
+              },
+              {
+                "key": "hybrid_mode",
+                "value": "required",
+                "index": true
+              },
+              {
+                "key": "status",
+                "value": "algorithm_active",
+                "index": true
+              }
+            ]
+          },
+          {
+            "type": "pqc_hybrid_verify",
+            "attributes": [
+              {
+                "key": "address",
+                "value": "qor1ylgewp0h038mrnslyte4yst20q0zwdhqs7fujv",
+                "index": true
+              },
+              {
+                "key": "algorithm_id",
+                "value": "dilithium5",
+                "index": true
+              },
+              {
+                "key": "status",
+                "value": "verified",
+                "index": true
+              }
+            ]
+          }
+        ],
+        "explorerAmountComparison": "0.06 QOR equals the charged fee; MsgSend amount is 1 uqor"
+      }
+    },
+    "historicalState": {
+      "status": "PASS",
+      "details": {
+        "before": {
+          "nonce": "0x6",
+          "balance": "0x5665dcf3e5ca90000"
+        },
+        "after": {
+          "nonce": "0x7",
+          "balance": "0x56588a58fbe230000"
+        },
+        "heights": [
+          10625584,
+          10625585
+        ],
+        "decrease": "60000000000000000"
+      }
+    }
+  },
+  "rawResponses": {
+    "native-tx": "{\"jsonrpc\":\"2.0\",\"id\":-1,\"result\":{\"hash\":\"5216F3E05807BDEBD8E843E831635FE60316D294FE94DE03690F3C5D520D8DDE\",\"height\":\"10625585\",\"index\":0,\"tx_result\":{\"code\":0,\"data\":\"EiYKJC9jb3Ntb3MuYmFuay52MWJldGExLk1zZ1NlbmRSZXNwb25zZQ==\",\"log\":\"\",\"info\":\"\",\"gas_wanted\":\"400000\",\"gas_used\":\"167527\",\"events\":[{\"type\":\"pqc_verify\",\"attributes\":[{\"key\":\"address\",\"value\":\"qor1ylgewp0h038mrnslyte4yst20q0zwdhqs7fujv\",\"index\":true},{\"key\":\"key_type\",\"value\":\"hybrid\",\"index\":true},{\"key\":\"algorithm_id\",\"value\":\"dilithium5\",\"index\":true},{\"key\":\"hybrid_mode\",\"value\":\"required\",\"index\":true},{\"key\":\"status\",\"value\":\"algorithm_active\",\"index\":true}]},{\"type\":\"pqc_hybrid_verify\",\"attributes\":[{\"key\":\"address\",\"value\":\"qor1ylgewp0h038mrnslyte4yst20q0zwdhqs7fujv\",\"index\":true},{\"key\":\"algorithm_id\",\"value\":\"dilithium5\",\"index\":true},{\"key\":\"status\",\"value\":\"verified\",\"index\":true}]},{\"type\":\"ai_anomaly_check\",\"attributes\":[{\"key\":\"score_millionths\",\"value\":\"0\",\"index\":true},{\"key\":\"action\",\"value\":\"allow\",\"index\":true},{\"key\":\"is_anomalous\",\"value\":\"false\",\"index\":true}]},{\"type\":\"coin_spent\",\"attributes\":[{\"key\":\"spender\",\"value\":\"qor1ylgewp0h038mrnslyte4yst20q0zwdhqs7fujv\",\"index\":true},{\"key\":\"amount\",\"value\":\"60000uqor\",\"index\":true}]},{\"type\":\"coin_received\",\"attributes\":[{\"key\":\"receiver\",\"value\":\"qor17xpfvakm2amg962yls6f84z3kell8c5lyj5r7l\",\"index\":true},{\"key\":\"amount\",\"value\":\"60000uqor\",\"index\":true}]},{\"type\":\"transfer\",\"attributes\":[{\"key\":\"recipient\",\"value\":\"qor17xpfvakm2amg962yls6f84z3kell8c5lyj5r7l\",\"index\":true},{\"key\":\"sender\",\"value\":\"qor1ylgewp0h038mrnslyte4yst20q0zwdhqs7fujv\",\"index\":true},{\"key\":\"amount\",\"value\":\"60000uqor\",\"index\":true}]},{\"type\":\"message\",\"attributes\":[{\"key\":\"sender\",\"value\":\"qor1ylgewp0h038mrnslyte4yst20q0zwdhqs7fujv\",\"index\":true}]},{\"type\":\"tx\",\"attributes\":[{\"key\":\"fee\",\"value\":\"60000uqor\",\"index\":true},{\"key\":\"fee_payer\",\"value\":\"qor1ylgewp0h038mrnslyte4yst20q0zwdhqs7fujv\",\"index\":true}]},{\"type\":\"tx\",\"attributes\":[{\"key\":\"acc_seq\",\"value\":\"qor1ylgewp0h038mrnslyte4yst20q0zwdhqs7fujv/6\",\"index\":true}]},{\"type\":\"tx\",\"attributes\":[{\"key\":\"signature\",\"value\":\"o/D5AIohzsj03I2XueJIBMHTAm/ZIxAYiUGmtJrYzL0KS6/EZY2UYvii3+p3X0MvtUWjAiK6CZL/1ifusgUokQ==\",\"index\":true}]},{\"type\":\"message\",\"attributes\":[{\"key\":\"action\",\"value\":\"/cosmos.bank.v1beta1.MsgSend\",\"index\":true},{\"key\":\"sender\",\"value\":\"qor1ylgewp0h038mrnslyte4yst20q0zwdhqs7fujv\",\"index\":true},{\"key\":\"module\",\"value\":\"bank\",\"index\":true},{\"key\":\"msg_index\",\"value\":\"0\",\"index\":true}]},{\"type\":\"coin_spent\",\"attributes\":[{\"key\":\"spender\",\"value\":\"qor1ylgewp0h038mrnslyte4yst20q0zwdhqs7fujv\",\"index\":true},{\"key\":\"amount\",\"value\":\"1uqor\",\"index\":true},{\"key\":\"msg_index\",\"value\":\"0\",\"index\":true}]},{\"type\":\"coin_received\",\"attributes\":[{\"key\":\"receiver\",\"value\":\"qor1ylgewp0h038mrnslyte4yst20q0zwdhqs7fujv\",\"index\":true},{\"key\":\"amount\",\"value\":\"1uqor\",\"index\":true},{\"key\":\"msg_index\",\"value\":\"0\",\"index\":true}]},{\"type\":\"transfer\",\"attributes\":[{\"key\":\"recipient\",\"value\":\"qor1ylgewp0h038mrnslyte4yst20q0zwdhqs7fujv\",\"index\":true},{\"key\":\"sender\",\"value\":\"qor1ylgewp0h038mrnslyte4yst20q0zwdhqs7fujv\",\"index\":true},{\"key\":\"amount\",\"value\":\"1uqor\",\"index\":true},{\"key\":\"msg_index\",\"value\":\"0\",\"index\":true}]},{\"type\":\"message\",\"attributes\":[{\"key\":\"sender\",\"value\":\"qor1ylgewp0h038mrnslyte4yst20q0zwdhqs7fujv\",\"index\":true},{\"key\":\"msg_index\",\"value\":\"0\",\"index\":true}]}],\"codespace\":\"\"},\"tx\":\"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\"}}",
+    "native-status": "{\"jsonrpc\":\"2.0\",\"id\":-1,\"result\":{\"node_info\":{\"protocol_version\":{\"p2p\":\"8\",\"block\":\"11\",\"app\":\"0\"},\"id\":\"9952bac72f3e32faebc854eecf8bb7a01b0a9cec\",\"listen_addr\":\"5.196.138.208:26656\",\"network\":\"qorechain-diana\",\"version\":\"0.38.26\",\"channels\":\"40202122233038606100\",\"moniker\":\"rpc0-ovh\",\"other\":{\"tx_index\":\"on\",\"rpc_address\":\"tcp://127.0.0.1:26657\"}},\"sync_info\":{\"latest_block_hash\":\"74631C1EC6EF8FFACF324DB561DA3A1D51192B6F9AD69CF9D2F1C712989AE1EB\",\"latest_app_hash\":\"05304E200E654BBF1B06D6D9AA829174CDF9FE61DD90A86383A4A6943CC4CAAB\",\"latest_block_height\":\"10630332\",\"latest_block_time\":\"2026-11-23T21:26:52.2895185Z\",\"earliest_block_hash\":\"FB749C28A87045FB553E428C699E393ABE1ED6DD44C23A75BE93F6D5665B43B2\",\"earliest_app_hash\":\"8C967F3819A8C32DE04B23FC1FC1A2C636EBEC25B235C1090FD0FE3E91DDFC66\",\"earliest_block_height\":\"8790799\",\"earliest_block_time\":\"2026-10-25T09:21:32.207674642Z\",\"catching_up\":false},\"validator_info\":{\"address\":\"AF2BDBE5C90411FE6580F62377BDC7AD551358F8\",\"pub_key\":{\"type\":\"tendermint/PubKeyEd25519\",\"value\":\"Iu+w8rrIEsWRiJW3cMGnuSNRC8sNP9KcFw+izq4yYO0=\"},\"voting_power\":\"0\"}}}",
+    "nonce-0": "{\"jsonrpc\":\"2.0\",\"id\":1,\"result\":\"0x6\"}\n",
+    "nonce-1": "{\"jsonrpc\":\"2.0\",\"id\":1,\"result\":\"0x7\"}\n",
+    "balance-0": "{\"jsonrpc\":\"2.0\",\"id\":1,\"result\":\"0x5665dcf3e5ca90000\"}\n",
+    "balance-1": "{\"jsonrpc\":\"2.0\",\"id\":1,\"result\":\"0x56588a58fbe230000\"}\n",
+    "evm-chain": "{\"jsonrpc\":\"2.0\",\"id\":1,\"result\":\"0x2648\"}\n"
+  },
+  "requests": [
+    {
+      "name": "native-status",
+      "url": "https://rpc-testnet.qore.host/status"
+    },
+    {
+      "name": "native-tx",
+      "url": "https://rpc-testnet.qore.host/tx?hash=0x5216F3E05807BDEBD8E843E831635FE60316D294FE94DE03690F3C5D520D8DDE&prove=false"
+    },
+    {
+      "name": "evm-chain",
+      "url": "https://evm-testnet.qore.host",
+      "method": "eth_chainId",
+      "params": []
+    },
+    {
+      "name": "nonce-0",
+      "url": "https://evm-testnet.qore.host",
+      "method": "eth_getTransactionCount",
+      "params": [
+        "0x27d19705f77c4fb1ce1f22f352416a781e2736e0",
+        "0xa22230"
+      ]
+    },
+    {
+      "name": "balance-0",
+      "url": "https://evm-testnet.qore.host",
+      "method": "eth_getBalance",
+      "params": [
+        "0x27d19705f77c4fb1ce1f22f352416a781e2736e0",
+        "0xa22230"
+      ]
+    },
+    {
+      "name": "nonce-1",
+      "url": "https://evm-testnet.qore.host",
+      "method": "eth_getTransactionCount",
+      "params": [
+        "0x27d19705f77c4fb1ce1f22f352416a781e2736e0",
+        "0xa22231"
+      ]
+    },
+    {
+      "name": "balance-1",
+      "url": "https://evm-testnet.qore.host",
+      "method": "eth_getBalance",
+      "params": [
+        "0x27d19705f77c4fb1ce1f22f352416a781e2736e0",
+        "0xa22231"
+      ]
+    }
+  ],
+  "rpcStatus": {
+    "native-status": {
+      "status": "PASS"
+    },
+    "native-tx": {
+      "status": "PASS"
+    },
+    "evm-chain": {
+      "status": "PASS"
+    },
+    "nonce-0": {
+      "status": "PASS"
+    },
+    "balance-0": {
+      "status": "PASS"
+    },
+    "nonce-1": {
+      "status": "PASS"
+    },
+    "balance-1": {
+      "status": "PASS"
+    }
+  }
+}

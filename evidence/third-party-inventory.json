@@ -1,0 +1,1718 @@
+{
+  "scope": "Frozen v1.0.0 browser release and Phase 0 kit reuse. Source import graph and exact archived bundle markers, no rebuild.",
+  "commit": "613335b03e1c95b587a67fada29031ed415e17de",
+  "ciRun": 45053626379,
+  "bundles": {
+    "appSha256": "014ea592456d5a74a989f3f9da0158afb6609defebc7e7c950fc1f61544daa60",
+    "verifierSha256": "d0cc5b65b102fca63b8c8853d256cd3a49cc4a023d7ee869ef1a3c6a1e6031f1",
+    "metafile": {
+      "status": "Matched both exact frozen JS output hashes with and without metafile",
+      "scratchRef": "v1.0.0",
+      "command": "node scripts/audit-metafile.mjs in scratch worktree; frozen build options plus metafile: true",
+      "method": "esbuild JS API invoked from Node CLI to retain separate-verifier plugin",
+      "moduleMaps": [
+        {
+          "output": "dist/app.js",
+          "bytes": 107182,
+          "modules": [
+            {
+              "path": "../../../../../../dev/qorelens/node_modules/cosmjs-types/utf8.js",
+              "bytes": 1124
+            },
+            {
+              "path": "../../../../../../dev/qorelens/node_modules/cosmjs-types/varint.js",
+              "bytes": 3271
+            },
+            {
+              "path": "../../../../../../dev/qorelens/node_modules/cosmjs-types/binary.js",
+              "bytes": 4913
+            },
+            {
+              "path": "../../../../../../dev/qorelens/node_modules/cosmjs-types/helpers.js",
+              "bytes": 2218
+            },
+            {
+              "path": "../../../../../../dev/qorelens/node_modules/cosmjs-types/cosmos/base/v1beta1/coin.js",
+              "bytes": 2962
+            },
+            {
+              "path": "../../../../../../dev/qorelens/node_modules/cosmjs-types/cosmos/bank/v1beta1/bank.js",
+              "bytes": 8144
+            },
+            {
+              "path": "../../../../../../dev/qorelens/node_modules/cosmjs-types/cosmos/bank/v1beta1/tx.js",
+              "bytes": 7764
+            },
+            {
+              "path": "src/wallet/adapter.mjs",
+              "bytes": 992
+            },
+            {
+              "path": "src/lens/evidence.mjs",
+              "bytes": 1329
+            },
+            {
+              "path": "../../../../../../dev/qorelens/node_modules/@noble/hashes/_u64.js",
+              "bytes": 418
+            },
+            {
+              "path": "../../../../../../dev/qorelens/node_modules/@noble/hashes/utils.js",
+              "bytes": 4072
+            },
+            {
+              "path": "../../../../../../dev/qorelens/node_modules/@noble/hashes/_md.js",
+              "bytes": 1485
+            },
+            {
+              "path": "../../../../../../dev/qorelens/node_modules/@noble/hashes/legacy.js",
+              "bytes": 1789
+            },
+            {
+              "path": "../../../../../../dev/qorelens/node_modules/@noble/hashes/sha3.js",
+              "bytes": 3674
+            },
+            {
+              "path": "../../../../../../dev/qorelens/node_modules/@scure/base/index.js",
+              "bytes": 5473
+            },
+            {
+              "path": "../../../../../../dev/qorelens/node_modules/@noble/curves/utils.js",
+              "bytes": 3229
+            },
+            {
+              "path": "../../../../../../dev/qorelens/node_modules/@noble/curves/abstract/modular.js",
+              "bytes": 7143
+            },
+            {
+              "path": "../../../../../../dev/qorelens/node_modules/@noble/hashes/sha2.js",
+              "bytes": 1905
+            },
+            {
+              "path": "../../../../../../dev/qorelens/node_modules/@noble/curves/abstract/curve.js",
+              "bytes": 5727
+            },
+            {
+              "path": "../../../../../../dev/qorelens/node_modules/@noble/hashes/hmac.js",
+              "bytes": 1318
+            },
+            {
+              "path": "../../../../../../dev/qorelens/node_modules/@noble/curves/abstract/der.js",
+              "bytes": 2394
+            },
+            {
+              "path": "../../../../../../dev/qorelens/node_modules/@noble/curves/abstract/weierstrass.js",
+              "bytes": 13234
+            },
+            {
+              "path": "../../../../../../dev/qorelens/node_modules/@noble/curves/secp256k1.js",
+              "bytes": 1131
+            },
+            {
+              "path": "src/verify/crypto.mjs",
+              "bytes": 1255
+            },
+            {
+              "path": "src/verify/vector-checks.mjs",
+              "bytes": 117
+            },
+            {
+              "path": "src/lens/account.mjs",
+              "bytes": 240
+            },
+            {
+              "path": "src/chain/network.mjs",
+              "bytes": 198
+            },
+            {
+              "path": "src/chain/rpc.mjs",
+              "bytes": 1183
+            },
+            {
+              "path": "src/chain/precompiles.mjs",
+              "bytes": 1500
+            },
+            {
+              "path": "src/lens/session.mjs",
+              "bytes": 8187
+            },
+            {
+              "path": "src/ui/main.ts",
+              "bytes": 4845
+            },
+            {
+              "path": "src/report/integrity.mjs",
+              "bytes": 1979
+            },
+            {
+              "path": "src/report/fingerprint.mjs",
+              "bytes": 1036
+            }
+          ]
+        },
+        {
+          "output": "dist/verifier.js",
+          "bytes": 96886,
+          "modules": [
+            {
+              "path": "../../../../../../dev/qorelens/node_modules/cosmjs-types/utf8.js",
+              "bytes": 1124
+            },
+            {
+              "path": "../../../../../../dev/qorelens/node_modules/cosmjs-types/varint.js",
+              "bytes": 3271
+            },
+            {
+              "path": "../../../../../../dev/qorelens/node_modules/cosmjs-types/binary.js",
+              "bytes": 4913
+            },
+            {
+              "path": "../../../../../../dev/qorelens/node_modules/cosmjs-types/helpers.js",
+              "bytes": 2218
+            },
+            {
+              "path": "../../../../../../dev/qorelens/node_modules/cosmjs-types/cosmos/base/v1beta1/coin.js",
+              "bytes": 2962
+            },
+            {
+              "path": "../../../../../../dev/qorelens/node_modules/cosmjs-types/cosmos/bank/v1beta1/bank.js",
+              "bytes": 8166
+            },
+            {
+              "path": "../../../../../../dev/qorelens/node_modules/cosmjs-types/cosmos/bank/v1beta1/tx.js",
+              "bytes": 7786
+            },
+            {
+              "path": "../../../../../../dev/qorelens/node_modules/@noble/hashes/_u64.js",
+              "bytes": 418
+            },
+            {
+              "path": "../../../../../../dev/qorelens/node_modules/@noble/hashes/utils.js",
+              "bytes": 4026
+            },
+            {
+              "path": "../../../../../../dev/qorelens/node_modules/@noble/hashes/_md.js",
+              "bytes": 1484
+            },
+            {
+              "path": "../../../../../../dev/qorelens/node_modules/@noble/hashes/sha3.js",
+              "bytes": 3749
+            },
+            {
+              "path": "../../../../../../dev/qorelens/node_modules/@noble/curves/utils.js",
+              "bytes": 3227
+            },
+            {
+              "path": "../../../../../../dev/qorelens/node_modules/@noble/curves/abstract/modular.js",
+              "bytes": 7143
+            },
+            {
+              "path": "../../../../../../dev/qorelens/node_modules/@noble/curves/abstract/fft.js",
+              "bytes": 1946
+            },
+            {
+              "path": "../../../../../../dev/qorelens/node_modules/@noble/post-quantum/utils.js",
+              "bytes": 3484
+            },
+            {
+              "path": "../../../../../../dev/qorelens/node_modules/@noble/post-quantum/_crystals.js",
+              "bytes": 1577
+            },
+            {
+              "path": "../../../../../../dev/qorelens/node_modules/@noble/post-quantum/ml-dsa.js",
+              "bytes": 8120
+            },
+            {
+              "path": "../../../../../../dev/qorelens/node_modules/@noble/hashes/sha2.js",
+              "bytes": 1905
+            },
+            {
+              "path": "../../../../../../dev/qorelens/node_modules/@noble/curves/abstract/curve.js",
+              "bytes": 5723
+            },
+            {
+              "path": "../../../../../../dev/qorelens/node_modules/@noble/hashes/hmac.js",
+              "bytes": 1317
+            },
+            {
+              "path": "../../../../../../dev/qorelens/node_modules/@noble/curves/abstract/der.js",
+              "bytes": 2394
+            },
+            {
+              "path": "../../../../../../dev/qorelens/node_modules/@noble/curves/abstract/weierstrass.js",
+              "bytes": 13237
+            },
+            {
+              "path": "../../../../../../dev/qorelens/node_modules/@noble/curves/secp256k1.js",
+              "bytes": 1132
+            },
+            {
+              "path": "src/verify/crypto.mjs",
+              "bytes": 459
+            },
+            {
+              "path": "src/verify/vector-checks.mjs",
+              "bytes": 1852
+            },
+            {
+              "path": "src/lens/evidence.mjs",
+              "bytes": 157
+            },
+            {
+              "path": "src/report/integrity.mjs",
+              "bytes": 178
+            },
+            {
+              "path": "src/verify/verdict.mjs",
+              "bytes": 1861
+            }
+          ]
+        }
+      ]
+    },
+    "markers": [
+      {
+        "marker": "RejNTTPoly: unaligned block",
+        "app": false,
+        "verifier": true
+      },
+      {
+        "marker": "Wrong GAMMA1",
+        "app": false,
+        "verifier": true
+      },
+      {
+        "marker": "hint.encode: hint is false",
+        "app": false,
+        "verifier": true
+      },
+      {
+        "marker": "Invalid checksum",
+        "app": true,
+        "verifier": false
+      },
+      {
+        "marker": "secp256k1",
+        "app": true,
+        "verifier": true
+      },
+      {
+        "marker": "/cosmos.bank.v1beta1.MsgSend",
+        "app": true,
+        "verifier": true
+      }
+    ],
+    "legalCommentScan": {
+      "method": "Read the /*! Bundled license information block in each original archive member and match package headers. Compare with module maps.",
+      "byPackage": {
+        "@scure/base": [
+          "app.js"
+        ],
+        "@noble/curves": [
+          "app.js",
+          "verifier.js"
+        ],
+        "@noble/post-quantum": [
+          "verifier.js"
+        ],
+        "@noble/hashes": [],
+        "cosmjs-types": []
+      },
+      "fullLicenseTextsInBundle": false
+    }
+  },
+  "packages": [
+    {
+      "name": "@fontsource/ibm-plex-sans",
+      "version": "5.2.5",
+      "license": "OFL-1.1",
+      "scope": "Frozen WOFF2 assets",
+      "licenseSource": "node_modules/@fontsource/ibm-plex-sans/LICENSE",
+      "licenseSha256": "18aabf190848725e2576eefb5c29ba06aac1029d02132252a7f312eac2e50cf3",
+      "bundles": []
+    },
+    {
+      "name": "@fontsource/ibm-plex-mono",
+      "version": "5.2.5",
+      "license": "OFL-1.1",
+      "scope": "Frozen WOFF2 assets",
+      "licenseSource": "node_modules/@fontsource/ibm-plex-mono/LICENSE",
+      "licenseSha256": "18aabf190848725e2576eefb5c29ba06aac1029d02132252a7f312eac2e50cf3",
+      "bundles": []
+    },
+    {
+      "name": "cosmjs-types",
+      "version": "0.11.0",
+      "license": "Apache-2.0",
+      "scope": "dist/app.js, dist/verifier.js (byte-matched esbuild metafile)",
+      "licenseSource": "node_modules/cosmjs-types/LICENSE",
+      "licenseSha256": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4",
+      "bundles": [
+        "dist/app.js",
+        "dist/verifier.js"
+      ]
+    },
+    {
+      "name": "@noble/post-quantum",
+      "version": "0.7.1",
+      "license": "MIT",
+      "scope": "dist/verifier.js (byte-matched esbuild metafile)",
+      "licenseSource": "node_modules/@noble/post-quantum/LICENSE",
+      "licenseSha256": "0dea4b70b40ca57e3cfe30186e3dbd245147fe4d83ac566e92e70203aac59034",
+      "bundles": [
+        "dist/verifier.js"
+      ]
+    },
+    {
+      "name": "@noble/curves",
+      "version": "2.4.0",
+      "license": "MIT",
+      "scope": "dist/app.js, dist/verifier.js (byte-matched esbuild metafile)",
+      "licenseSource": "node_modules/@noble/curves/LICENSE",
+      "licenseSha256": "4f221aee6e072336700c408c68ab3b96a3fc09f6aebe6f48f1bd99e5ef13faec",
+      "bundles": [
+        "dist/app.js",
+        "dist/verifier.js"
+      ]
+    },
+    {
+      "name": "@noble/hashes",
+      "version": "2.4.0",
+      "license": "MIT",
+      "scope": "dist/app.js, dist/verifier.js (byte-matched esbuild metafile)",
+      "licenseSource": "node_modules/@noble/hashes/LICENSE",
+      "licenseSha256": "4f221aee6e072336700c408c68ab3b96a3fc09f6aebe6f48f1bd99e5ef13faec",
+      "bundles": [
+        "dist/app.js",
+        "dist/verifier.js"
+      ]
+    },
+    {
+      "name": "@scure/base",
+      "version": "2.4.0",
+      "license": "MIT",
+      "scope": "dist/app.js (byte-matched esbuild metafile)",
+      "licenseSource": "node_modules/@scure/base/LICENSE",
+      "licenseSha256": "3239e134eb6e6d64538ca76498c7fcb08a395249dd9d4af9927bf6d0169ee429",
+      "bundles": [
+        "dist/app.js"
+      ]
+    },
+    {
+      "name": "create-qorechain-dapp",
+      "version": "0.12.0",
+      "license": "Apache-2.0",
+      "scope": "Feasibility only; not a confirmed frozen product bundle input",
+      "licenseSource": "feasibility/toolchain/node_modules/create-qorechain-dapp/LICENSE",
+      "licenseSha256": "259049a178556ad6a7d70a73df691794f5f0204f5d1f1bda73343d7c7dc4a198",
+      "bundles": []
+    },
+    {
+      "name": "@qorechain/sdk",
+      "version": "0.12.0",
+      "license": "Apache-2.0",
+      "scope": "Feasibility only; not a confirmed frozen product bundle input",
+      "licenseSource": "feasibility/toolchain/node_modules/@qorechain/sdk/LICENSE",
+      "licenseSha256": "259049a178556ad6a7d70a73df691794f5f0204f5d1f1bda73343d7c7dc4a198",
+      "bundles": []
+    },
+    {
+      "name": "@qorechain/qoresign",
+      "version": "0.1.1",
+      "license": "Apache-2.0",
+      "scope": "Feasibility only; not a confirmed frozen product bundle input",
+      "licenseSource": "feasibility/toolchain/node_modules/@qorechain/qoresign/LICENSE",
+      "licenseSha256": "f7f4b02f99575ef7f547ccaf07015e4b1e984d9089bcf808d3eb2ebe7d4b1946",
+      "bundles": []
+    },
+    {
+      "name": "@qorechain/qorex-types",
+      "version": "0.1.0",
+      "license": "Apache-2.0",
+      "scope": "Feasibility only; not a confirmed frozen product bundle input",
+      "licenseSource": "feasibility/toolchain/node_modules/@qorechain/qorex-types/LICENSE",
+      "licenseSha256": "f7f4b02f99575ef7f547ccaf07015e4b1e984d9089bcf808d3eb2ebe7d4b1946",
+      "bundles": []
+    },
+    {
+      "name": "@qorechain/qorex-wallet-mock",
+      "version": "0.1.0",
+      "license": "Apache-2.0",
+      "scope": "Feasibility only; not a confirmed frozen product bundle input",
+      "licenseSource": "feasibility/toolchain/node_modules/@qorechain/qorex-wallet-mock/LICENSE",
+      "licenseSha256": "f7f4b02f99575ef7f547ccaf07015e4b1e984d9089bcf808d3eb2ebe7d4b1946",
+      "bundles": []
+    }
+  ],
+  "lockedDependencies": [
+    {
+      "file": "package-lock.json",
+      "entries": [
+        {
+          "path": "node_modules/@esbuild/aix-ppc64",
+          "version": "0.25.12",
+          "license": "MIT"
+        },
+        {
+          "path": "node_modules/@esbuild/android-arm",
+          "version": "0.25.12",
+          "license": "MIT"
+        },
+        {
+          "path": "node_modules/@esbuild/android-arm64",
+          "version": "0.25.12",
+          "license": "MIT"
+        },
+        {
+          "path": "node_modules/@esbuild/android-x64",
+          "version": "0.25.12",
+          "license": "MIT"
+        },
+        {
+          "path": "node_modules/@esbuild/darwin-arm64",
+          "version": "0.25.12",
+          "license": "MIT"
+        },
+        {
+          "path": "node_modules/@esbuild/darwin-x64",
+          "version": "0.25.12",
+          "license": "MIT"
+        },
+        {
+          "path": "node_modules/@esbuild/freebsd-arm64",
+          "version": "0.25.12",
+          "license": "MIT"
+        },
+        {
+          "path": "node_modules/@esbuild/freebsd-x64",
+          "version": "0.25.12",
+          "license": "MIT"
+        },
+        {
+          "path": "node_modules/@esbuild/linux-arm",
+          "version": "0.25.12",
+          "license": "MIT"
+        },
+        {
+          "path": "node_modules/@esbuild/linux-arm64",
+          "version": "0.25.12",
+          "license": "MIT"
+        },
+        {
+          "path": "node_modules/@esbuild/linux-ia32",
+          "version": "0.25.12",
+          "license": "MIT"
+        },
+        {
+          "path": "node_modules/@esbuild/linux-loong64",
+          "version": "0.25.12",
+          "license": "MIT"
+        },
+        {
+          "path": "node_modules/@esbuild/linux-mips64el",
+          "version": "0.25.12",
+          "license": "MIT"
+        },
+        {
+          "path": "node_modules/@esbuild/linux-ppc64",
+          "version": "0.25.12",
+          "license": "MIT"
+        },
+        {
+          "path": "node_modules/@esbuild/linux-riscv64",
+          "version": "0.25.12",
+          "license": "MIT"
+        },
+        {
+          "path": "node_modules/@esbuild/linux-s390x",
+          "version": "0.25.12",
+          "license": "MIT"
+        },
+        {
+          "path": "node_modules/@esbuild/linux-x64",
+          "version": "0.25.12",
+          "license": "MIT"
+        },
+        {
+          "path": "node_modules/@esbuild/netbsd-arm64",
+          "version": "0.25.12",
+          "license": "MIT"
+        },
+        {
+          "path": "node_modules/@esbuild/netbsd-x64",
+          "version": "0.25.12",
+          "license": "MIT"
+        },
+        {
+          "path": "node_modules/@esbuild/openbsd-arm64",
+          "version": "0.25.12",
+          "license": "MIT"
+        },
+        {
+          "path": "node_modules/@esbuild/openbsd-x64",
+          "version": "0.25.12",
+          "license": "MIT"
+        },
+        {
+          "path": "node_modules/@esbuild/openharmony-arm64",
+          "version": "0.25.12",
+          "license": "MIT"
+        },
+        {
+          "path": "node_modules/@esbuild/sunos-x64",
+          "version": "0.25.12",
+          "license": "MIT"
+        },
+        {
+          "path": "node_modules/@esbuild/win32-arm64",
+          "version": "0.25.12",
+          "license": "MIT"
+        },
+        {
+          "path": "node_modules/@esbuild/win32-ia32",
+          "version": "0.25.12",
+          "license": "MIT"
+        },
+        {
+          "path": "node_modules/@esbuild/win32-x64",
+          "version": "0.25.12",
+          "license": "MIT"
+        },
+        {
+          "path": "node_modules/@fontsource/ibm-plex-mono",
+          "version": "5.2.5",
+          "license": "OFL-1.1"
+        },
+        {
+          "path": "node_modules/@fontsource/ibm-plex-sans",
+          "version": "5.2.5",
+          "license": "OFL-1.1"
+        },
+        {
+          "path": "node_modules/@jridgewell/sourcemap-codec",
+          "version": "1.6.0",
+          "license": "MIT"
+        },
+        {
+          "path": "node_modules/@noble/ciphers",
+          "version": "2.4.0",
+          "license": "MIT"
+        },
+        {
+          "path": "node_modules/@noble/curves",
+          "version": "2.4.0",
+          "license": "MIT"
+        },
+        {
+          "path": "node_modules/@noble/hashes",
+          "version": "2.4.0",
+          "license": "MIT"
+        },
+        {
+          "path": "node_modules/@noble/post-quantum",
+          "version": "0.7.1",
+          "license": "MIT"
+        },
+        {
+          "path": "node_modules/@oxc-project/types",
+          "version": "0.156.0",
+          "license": "MIT"
+        },
+        {
+          "path": "node_modules/@playwright/test",
+          "version": "1.55.1",
+          "license": "Apache-2.0"
+        },
+        {
+          "path": "node_modules/@rolldown/binding-android-arm-eabi",
+          "version": "1.2.16",
+          "license": "MIT"
+        },
+        {
+          "path": "node_modules/@rolldown/binding-android-arm64",
+          "version": "1.2.16",
+          "license": "MIT"
+        },
+        {
+          "path": "node_modules/@rolldown/binding-darwin-arm64",
+          "version": "1.2.16",
+          "license": "MIT"
+        },
+        {
+          "path": "node_modules/@rolldown/binding-darwin-x64",
+          "version": "1.2.16",
+          "license": "MIT"
+        },
+        {
+          "path": "node_modules/@rolldown/binding-freebsd-x64",
+          "version": "1.2.16",
+          "license": "MIT"
+        },
+        {
+          "path": "node_modules/@rolldown/binding-linux-arm-gnueabihf",
+          "version": "1.2.16",
+          "license": "MIT"
+        },
+        {
+          "path": "node_modules/@rolldown/binding-linux-arm64-gnu",
+          "version": "1.2.16",
+          "license": "MIT"
+        },
+        {
+          "path": "node_modules/@rolldown/binding-linux-arm64-musl",
+          "version": "1.2.16",
+          "license": "MIT"
+        },
+        {
+          "path": "node_modules/@rolldown/binding-linux-ppc64-gnu",
+          "version": "1.2.16",
+          "license": "MIT"
+        },
+        {
+          "path": "node_modules/@rolldown/binding-linux-s390x-gnu",
+          "version": "1.2.16",
+          "license": "MIT"
+        },
+        {
+          "path": "node_modules/@rolldown/binding-linux-x64-gnu",
+          "version": "1.2.16",
+          "license": "MIT"
+        },
+        {
+          "path": "node_modules/@rolldown/binding-linux-x64-musl",
+          "version": "1.2.16",
+          "license": "MIT"
+        },
+        {
+          "path": "node_modules/@rolldown/binding-openharmony-arm64",
+          "version": "1.2.16",
+          "license": "MIT"
+        },
+        {
+          "path": "node_modules/@rolldown/binding-win32-arm64-msvc",
+          "version": "1.2.16",
+          "license": "MIT"
+        },
+        {
+          "path": "node_modules/@rolldown/binding-win32-x64-msvc",
+          "version": "1.2.16",
+          "license": "MIT"
+        },
+        {
+          "path": "node_modules/@rolldown/pluginutils",
+          "version": "1.0.1",
+          "license": "MIT"
+        },
+        {
+          "path": "node_modules/@scure/base",
+          "version": "2.4.0",
+          "license": "MIT"
+        },
+        {
+          "path": "node_modules/@standard-schema/spec",
+          "version": "1.1.0",
+          "license": "MIT"
+        },
+        {
+          "path": "node_modules/@types/chai",
+          "version": "5.2.3",
+          "license": "MIT"
+        },
+        {
+          "path": "node_modules/@types/deep-eql",
+          "version": "4.0.2",
+          "license": "MIT"
+        },
+        {
+          "path": "node_modules/@types/estree",
+          "version": "1.0.10",
+          "license": "MIT"
+        },
+        {
+          "path": "node_modules/@vitest/expect",
+          "version": "4.1.12",
+          "license": "MIT"
+        },
+        {
+          "path": "node_modules/@vitest/mocker",
+          "version": "4.1.12",
+          "license": "MIT"
+        },
+        {
+          "path": "node_modules/@vitest/pretty-format",
+          "version": "4.1.12",
+          "license": "MIT"
+        },
+        {
+          "path": "node_modules/@vitest/runner",
+          "version": "4.1.12",
+          "license": "MIT"
+        },
+        {
+          "path": "node_modules/@vitest/snapshot",
+          "version": "4.1.12",
+          "license": "MIT"
+        },
+        {
+          "path": "node_modules/@vitest/spy",
+          "version": "4.1.12",
+          "license": "MIT"
+        },
+        {
+          "path": "node_modules/@vitest/utils",
+          "version": "4.1.12",
+          "license": "MIT"
+        },
+        {
+          "path": "node_modules/assertion-error",
+          "version": "2.0.1",
+          "license": "MIT"
+        },
+        {
+          "path": "node_modules/axe-core",
+          "version": "4.10.3",
+          "license": "MPL-2.0"
+        },
+        {
+          "path": "node_modules/chai",
+          "version": "6.3.0",
+          "license": "MIT"
+        },
+        {
+          "path": "node_modules/convert-source-map",
+          "version": "2.0.0",
+          "license": "MIT"
+        },
+        {
+          "path": "node_modules/cosmjs-types",
+          "version": "0.11.0",
+          "license": "Apache-2.0"
+        },
+        {
+          "path": "node_modules/detect-libc",
+          "version": "2.1.2",
+          "license": "Apache-2.0"
+        },
+        {
+          "path": "node_modules/es-module-lexer",
+          "version": "2.3.2",
+          "license": "MIT"
+        },
+        {
+          "path": "node_modules/esbuild",
+          "version": "0.25.12",
+          "license": "MIT"
+        },
+        {
+          "path": "node_modules/estree-walker",
+          "version": "3.0.3",
+          "license": "MIT"
+        },
+        {
+          "path": "node_modules/expect-type",
+          "version": "1.4.0",
+          "license": "Apache-2.0"
+        },
+        {
+          "path": "node_modules/fdir",
+          "version": "6.5.0",
+          "license": "MIT"
+        },
+        {
+          "path": "node_modules/fsevents",
+          "version": "2.3.2",
+          "license": "MIT"
+        },
+        {
+          "path": "node_modules/lightningcss",
+          "version": "1.33.0",
+          "license": "MPL-2.0"
+        },
+        {
+          "path": "node_modules/lightningcss-android-arm64",
+          "version": "1.33.0",
+          "license": "MPL-2.0"
+        },
+        {
+          "path": "node_modules/lightningcss-darwin-arm64",
+          "version": "1.33.0",
+          "license": "MPL-2.0"
+        },
+        {
+          "path": "node_modules/lightningcss-darwin-x64",
+          "version": "1.33.0",
+          "license": "MPL-2.0"
+        },
+        {
+          "path": "node_modules/lightningcss-freebsd-x64",
+          "version": "1.33.0",
+          "license": "MPL-2.0"
+        },
+        {
+          "path": "node_modules/lightningcss-linux-arm-gnueabihf",
+          "version": "1.33.0",
+          "license": "MPL-2.0"
+        },
+        {
+          "path": "node_modules/lightningcss-linux-arm64-gnu",
+          "version": "1.33.0",
+          "license": "MPL-2.0"
+        },
+        {
+          "path": "node_modules/lightningcss-linux-arm64-musl",
+          "version": "1.33.0",
+          "license": "MPL-2.0"
+        },
+        {
+          "path": "node_modules/lightningcss-linux-x64-gnu",
+          "version": "1.33.0",
+          "license": "MPL-2.0"
+        },
+        {
+          "path": "node_modules/lightningcss-linux-x64-musl",
+          "version": "1.33.0",
+          "license": "MPL-2.0"
+        },
+        {
+          "path": "node_modules/lightningcss-win32-arm64-msvc",
+          "version": "1.33.0",
+          "license": "MPL-2.0"
+        },
+        {
+          "path": "node_modules/lightningcss-win32-x64-msvc",
+          "version": "1.33.0",
+          "license": "MPL-2.0"
+        },
+        {
+          "path": "node_modules/magic-string",
+          "version": "0.30.21",
+          "license": "MIT"
+        },
+        {
+          "path": "node_modules/nanoid",
+          "version": "3.3.20",
+          "license": "MIT"
+        },
+        {
+          "path": "node_modules/obug",
+          "version": "2.2.1",
+          "license": "MIT"
+        },
+        {
+          "path": "node_modules/pathe",
+          "version": "2.0.3",
+          "license": "MIT"
+        },
+        {
+          "path": "node_modules/picocolors",
+          "version": "1.1.1",
+          "license": "ISC"
+        },
+        {
+          "path": "node_modules/picomatch",
+          "version": "4.0.7",
+          "license": "MIT"
+        },
+        {
+          "path": "node_modules/playwright",
+          "version": "1.55.1",
+          "license": "Apache-2.0"
+        },
+        {
+          "path": "node_modules/playwright-core",
+          "version": "1.55.1",
+          "license": "Apache-2.0"
+        },
+        {
+          "path": "node_modules/postcss",
+          "version": "8.5.32",
+          "license": "MIT"
+        },
+        {
+          "path": "node_modules/prettier",
+          "version": "3.5.3",
+          "license": "MIT"
+        },
+        {
+          "path": "node_modules/rolldown",
+          "version": "1.2.16",
+          "license": "MIT"
+        },
+        {
+          "path": "node_modules/siginfo",
+          "version": "2.0.0",
+          "license": "ISC"
+        },
+        {
+          "path": "node_modules/source-map-js",
+          "version": "1.2.2",
+          "license": "BSD-3-Clause"
+        },
+        {
+          "path": "node_modules/stackback",
+          "version": "0.0.2",
+          "license": "MIT"
+        },
+        {
+          "path": "node_modules/std-env",
+          "version": "4.3.0",
+          "license": "MIT"
+        },
+        {
+          "path": "node_modules/tinybench",
+          "version": "2.9.0",
+          "license": "MIT"
+        },
+        {
+          "path": "node_modules/tinyexec",
+          "version": "1.3.1",
+          "license": "MIT"
+        },
+        {
+          "path": "node_modules/tinyglobby",
+          "version": "0.2.17",
+          "license": "MIT"
+        },
+        {
+          "path": "node_modules/tinyrainbow",
+          "version": "3.2.0",
+          "license": "MIT"
+        },
+        {
+          "path": "node_modules/vite",
+          "version": "8.3.6",
+          "license": "MIT"
+        },
+        {
+          "path": "node_modules/vite/node_modules/fsevents",
+          "version": "2.3.3",
+          "license": "MIT"
+        },
+        {
+          "path": "node_modules/vitest",
+          "version": "4.1.12",
+          "license": "MIT"
+        },
+        {
+          "path": "node_modules/why-is-node-running",
+          "version": "2.3.0",
+          "license": "MIT"
+        }
+      ]
+    },
+    {
+      "file": "feasibility/toolchain/package-lock.json",
+      "entries": [
+        {
+          "path": "node_modules/@adraffy/ens-normalize",
+          "version": "1.11.1",
+          "license": "MIT"
+        },
+        {
+          "path": "node_modules/@bufbuild/protobuf",
+          "version": "2.17.0",
+          "license": "(Apache-2.0 AND BSD-3-Clause)"
+        },
+        {
+          "path": "node_modules/@clack/core",
+          "version": "0.3.5",
+          "license": "MIT"
+        },
+        {
+          "path": "node_modules/@clack/prompts",
+          "version": "0.7.0",
+          "license": "MIT"
+        },
+        {
+          "path": "node_modules/@clack/prompts/node_modules/is-unicode-supported",
+          "version": "1.3.0",
+          "license": "MIT"
+        },
+        {
+          "path": "node_modules/@cosmjs/amino",
+          "version": "0.39.0",
+          "license": "Apache-2.0"
+        },
+        {
+          "path": "node_modules/@cosmjs/cosmwasm",
+          "version": "0.38.1",
+          "license": "Apache-2.0"
+        },
+        {
+          "path": "node_modules/@cosmjs/cosmwasm-stargate",
+          "version": "0.39.0",
+          "license": "Apache-2.0"
+        },
+        {
+          "path": "node_modules/@cosmjs/cosmwasm/node_modules/@cosmjs/amino",
+          "version": "0.38.1",
+          "license": "Apache-2.0"
+        },
+        {
+          "path": "node_modules/@cosmjs/cosmwasm/node_modules/@cosmjs/crypto",
+          "version": "0.38.1",
+          "license": "Apache-2.0"
+        },
+        {
+          "path": "node_modules/@cosmjs/cosmwasm/node_modules/@cosmjs/encoding",
+          "version": "0.38.1",
+          "license": "Apache-2.0"
+        },
+        {
+          "path": "node_modules/@cosmjs/cosmwasm/node_modules/@cosmjs/json-rpc",
+          "version": "0.38.1",
+          "license": "Apache-2.0"
+        },
+        {
+          "path": "node_modules/@cosmjs/cosmwasm/node_modules/@cosmjs/math",
+          "version": "0.38.1",
+          "license": "Apache-2.0"
+        },
+        {
+          "path": "node_modules/@cosmjs/cosmwasm/node_modules/@cosmjs/proto-signing",
+          "version": "0.38.1",
+          "license": "Apache-2.0"
+        },
+        {
+          "path": "node_modules/@cosmjs/cosmwasm/node_modules/@cosmjs/socket",
+          "version": "0.38.1",
+          "license": "Apache-2.0"
+        },
+        {
+          "path": "node_modules/@cosmjs/cosmwasm/node_modules/@cosmjs/stargate",
+          "version": "0.38.1",
+          "license": "Apache-2.0"
+        },
+        {
+          "path": "node_modules/@cosmjs/cosmwasm/node_modules/@cosmjs/stream",
+          "version": "0.38.1",
+          "license": "Apache-2.0"
+        },
+        {
+          "path": "node_modules/@cosmjs/cosmwasm/node_modules/@cosmjs/tendermint-rpc",
+          "version": "0.38.1",
+          "license": "Apache-2.0"
+        },
+        {
+          "path": "node_modules/@cosmjs/cosmwasm/node_modules/@cosmjs/utils",
+          "version": "0.38.1",
+          "license": "Apache-2.0"
+        },
+        {
+          "path": "node_modules/@cosmjs/cosmwasm/node_modules/@noble/ciphers",
+          "version": "1.3.0",
+          "license": "MIT"
+        },
+        {
+          "path": "node_modules/@cosmjs/cosmwasm/node_modules/@noble/curves",
+          "version": "1.9.7",
+          "license": "MIT"
+        },
+        {
+          "path": "node_modules/@cosmjs/cosmwasm/node_modules/@noble/hashes",
+          "version": "1.8.0",
+          "license": "MIT"
+        },
+        {
+          "path": "node_modules/@cosmjs/cosmwasm/node_modules/@scure/bip39",
+          "version": "1.6.0",
+          "license": "MIT"
+        },
+        {
+          "path": "node_modules/@cosmjs/cosmwasm/node_modules/@scure/bip39/node_modules/@scure/base",
+          "version": "1.2.6",
+          "license": "MIT"
+        },
+        {
+          "path": "node_modules/@cosmjs/crypto",
+          "version": "0.39.0",
+          "license": "Apache-2.0"
+        },
+        {
+          "path": "node_modules/@cosmjs/encoding",
+          "version": "0.39.0",
+          "license": "Apache-2.0"
+        },
+        {
+          "path": "node_modules/@cosmjs/json-rpc",
+          "version": "0.39.0",
+          "license": "Apache-2.0"
+        },
+        {
+          "path": "node_modules/@cosmjs/math",
+          "version": "0.39.0",
+          "license": "Apache-2.0"
+        },
+        {
+          "path": "node_modules/@cosmjs/proto-signing",
+          "version": "0.39.0",
+          "license": "Apache-2.0"
+        },
+        {
+          "path": "node_modules/@cosmjs/socket",
+          "version": "0.39.0",
+          "license": "Apache-2.0"
+        },
+        {
+          "path": "node_modules/@cosmjs/stargate",
+          "version": "0.39.0",
+          "license": "Apache-2.0"
+        },
+        {
+          "path": "node_modules/@cosmjs/stream",
+          "version": "0.39.0",
+          "license": "Apache-2.0"
+        },
+        {
+          "path": "node_modules/@cosmjs/tendermint-rpc",
+          "version": "0.39.0",
+          "license": "Apache-2.0"
+        },
+        {
+          "path": "node_modules/@cosmjs/utils",
+          "version": "0.39.0",
+          "license": "Apache-2.0"
+        },
+        {
+          "path": "node_modules/@esbuild/aix-ppc64",
+          "version": "0.25.12",
+          "license": "MIT"
+        },
+        {
+          "path": "node_modules/@esbuild/android-arm",
+          "version": "0.25.12",
+          "license": "MIT"
+        },
+        {
+          "path": "node_modules/@esbuild/android-arm64",
+          "version": "0.25.12",
+          "license": "MIT"
+        },
+        {
+          "path": "node_modules/@esbuild/android-x64",
+          "version": "0.25.12",
+          "license": "MIT"
+        },
+        {
+          "path": "node_modules/@esbuild/darwin-arm64",
+          "version": "0.25.12",
+          "license": "MIT"
+        },
+        {
+          "path": "node_modules/@esbuild/darwin-x64",
+          "version": "0.25.12",
+          "license": "MIT"
+        },
+        {
+          "path": "node_modules/@esbuild/freebsd-arm64",
+          "version": "0.25.12",
+          "license": "MIT"
+        },
+        {
+          "path": "node_modules/@esbuild/freebsd-x64",
+          "version": "0.25.12",
+          "license": "MIT"
+        },
+        {
+          "path": "node_modules/@esbuild/linux-arm",
+          "version": "0.25.12",
+          "license": "MIT"
+        },
+        {
+          "path": "node_modules/@esbuild/linux-arm64",
+          "version": "0.25.12",
+          "license": "MIT"
+        },
+        {
+          "path": "node_modules/@esbuild/linux-ia32",
+          "version": "0.25.12",
+          "license": "MIT"
+        },
+        {
+          "path": "node_modules/@esbuild/linux-loong64",
+          "version": "0.25.12",
+          "license": "MIT"
+        },
+        {
+          "path": "node_modules/@esbuild/linux-mips64el",
+          "version": "0.25.12",
+          "license": "MIT"
+        },
+        {
+          "path": "node_modules/@esbuild/linux-ppc64",
+          "version": "0.25.12",
+          "license": "MIT"
+        },
+        {
+          "path": "node_modules/@esbuild/linux-riscv64",
+          "version": "0.25.12",
+          "license": "MIT"
+        },
+        {
+          "path": "node_modules/@esbuild/linux-s390x",
+          "version": "0.25.12",
+          "license": "MIT"
+        },
+        {
+          "path": "node_modules/@esbuild/linux-x64",
+          "version": "0.25.12",
+          "license": "MIT"
+        },
+        {
+          "path": "node_modules/@esbuild/netbsd-arm64",
+          "version": "0.25.12",
+          "license": "MIT"
+        },
+        {
+          "path": "node_modules/@esbuild/netbsd-x64",
+          "version": "0.25.12",
+          "license": "MIT"
+        },
+        {
+          "path": "node_modules/@esbuild/openbsd-arm64",
+          "version": "0.25.12",
+          "license": "MIT"
+        },
+        {
+          "path": "node_modules/@esbuild/openbsd-x64",
+          "version": "0.25.12",
+          "license": "MIT"
+        },
+        {
+          "path": "node_modules/@esbuild/openharmony-arm64",
+          "version": "0.25.12",
+          "license": "MIT"
+        },
+        {
+          "path": "node_modules/@esbuild/sunos-x64",
+          "version": "0.25.12",
+          "license": "MIT"
+        },
+        {
+          "path": "node_modules/@esbuild/win32-arm64",
+          "version": "0.25.12",
+          "license": "MIT"
+        },
+        {
+          "path": "node_modules/@esbuild/win32-ia32",
+          "version": "0.25.12",
+          "license": "MIT"
+        },
+        {
+          "path": "node_modules/@esbuild/win32-x64",
+          "version": "0.25.12",
+          "license": "MIT"
+        },
+        {
+          "path": "node_modules/@noble/ciphers",
+          "version": "2.4.0",
+          "license": "MIT"
+        },
+        {
+          "path": "node_modules/@noble/curves",
+          "version": "2.4.0",
+          "license": "MIT"
+        },
+        {
+          "path": "node_modules/@noble/hashes",
+          "version": "2.4.0",
+          "license": "MIT"
+        },
+        {
+          "path": "node_modules/@noble/post-quantum",
+          "version": "0.7.1",
+          "license": "MIT"
+        },
+        {
+          "path": "node_modules/@qorechain/evm",
+          "version": "0.12.0",
+          "license": "Apache-2.0"
+        },
+        {
+          "path": "node_modules/@qorechain/pqc",
+          "version": "0.2.3",
+          "license": "Apache-2.0"
+        },
+        {
+          "path": "node_modules/@qorechain/qoresign",
+          "version": "0.1.1",
+          "license": "Apache-2.0"
+        },
+        {
+          "path": "node_modules/@qorechain/qorex-types",
+          "version": "0.1.0",
+          "license": "Apache-2.0"
+        },
+        {
+          "path": "node_modules/@qorechain/qorex-wallet-mock",
+          "version": "0.1.0",
+          "license": "Apache-2.0"
+        },
+        {
+          "path": "node_modules/@qorechain/qorex-wallet-mock/node_modules/@qorechain/qoresign",
+          "version": "0.1.0",
+          "license": "Apache-2.0"
+        },
+        {
+          "path": "node_modules/@qorechain/sdk",
+          "version": "0.12.0",
+          "license": "Apache-2.0"
+        },
+        {
+          "path": "node_modules/@qorechain/sdk/node_modules/@noble/curves",
+          "version": "1.9.7",
+          "license": "MIT"
+        },
+        {
+          "path": "node_modules/@qorechain/sdk/node_modules/@noble/hashes",
+          "version": "1.8.0",
+          "license": "MIT"
+        },
+        {
+          "path": "node_modules/@qorechain/sdk/node_modules/@scure/base",
+          "version": "1.2.6",
+          "license": "MIT"
+        },
+        {
+          "path": "node_modules/@qorechain/sdk/node_modules/@scure/bip32",
+          "version": "1.7.0",
+          "license": "MIT"
+        },
+        {
+          "path": "node_modules/@qorechain/sdk/node_modules/@scure/bip39",
+          "version": "1.6.0",
+          "license": "MIT"
+        },
+        {
+          "path": "node_modules/@scure/base",
+          "version": "2.4.0",
+          "license": "MIT"
+        },
+        {
+          "path": "node_modules/@scure/bip32",
+          "version": "2.4.0",
+          "license": "MIT"
+        },
+        {
+          "path": "node_modules/@scure/bip39",
+          "version": "2.4.0",
+          "license": "MIT"
+        },
+        {
+          "path": "node_modules/abitype",
+          "version": "1.2.3",
+          "license": "MIT"
+        },
+        {
+          "path": "node_modules/base64-js",
+          "version": "1.5.1",
+          "license": "MIT"
+        },
+        {
+          "path": "node_modules/bech32",
+          "version": "2.0.0",
+          "license": "MIT"
+        },
+        {
+          "path": "node_modules/cosmjs-types",
+          "version": "0.11.0",
+          "license": "Apache-2.0"
+        },
+        {
+          "path": "node_modules/create-qorechain-dapp",
+          "version": "0.12.0",
+          "license": "Apache-2.0"
+        },
+        {
+          "path": "node_modules/define-data-property",
+          "version": "1.1.4",
+          "license": "MIT"
+        },
+        {
+          "path": "node_modules/define-properties",
+          "version": "1.2.1",
+          "license": "MIT"
+        },
+        {
+          "path": "node_modules/es-define-property",
+          "version": "1.0.1",
+          "license": "MIT"
+        },
+        {
+          "path": "node_modules/es-errors",
+          "version": "1.3.0",
+          "license": "MIT"
+        },
+        {
+          "path": "node_modules/esbuild",
+          "version": "0.25.12",
+          "license": "MIT"
+        },
+        {
+          "path": "node_modules/eventemitter3",
+          "version": "5.0.1",
+          "license": "MIT"
+        },
+        {
+          "path": "node_modules/globalthis",
+          "version": "1.0.4",
+          "license": "MIT"
+        },
+        {
+          "path": "node_modules/gopd",
+          "version": "1.2.0",
+          "license": "MIT"
+        },
+        {
+          "path": "node_modules/has-property-descriptors",
+          "version": "1.0.2",
+          "license": "MIT"
+        },
+        {
+          "path": "node_modules/hash-wasm",
+          "version": "4.13.0",
+          "license": "MIT"
+        },
+        {
+          "path": "node_modules/isomorphic-ws",
+          "version": "4.0.1",
+          "license": "MIT"
+        },
+        {
+          "path": "node_modules/isows",
+          "version": "1.0.7",
+          "license": "MIT"
+        },
+        {
+          "path": "node_modules/micro-key-producer",
+          "version": "0.9.0",
+          "license": "MIT"
+        },
+        {
+          "path": "node_modules/micro-packed",
+          "version": "0.9.0",
+          "license": "MIT"
+        },
+        {
+          "path": "node_modules/micro-packed/node_modules/@scure/base",
+          "version": "2.2.0",
+          "license": "MIT"
+        },
+        {
+          "path": "node_modules/object-keys",
+          "version": "1.1.1",
+          "license": "MIT"
+        },
+        {
+          "path": "node_modules/ox",
+          "version": "0.14.56",
+          "license": "MIT"
+        },
+        {
+          "path": "node_modules/ox/node_modules/@noble/ciphers",
+          "version": "1.3.0",
+          "license": "MIT"
+        },
+        {
+          "path": "node_modules/ox/node_modules/@noble/curves",
+          "version": "1.9.1",
+          "license": "MIT"
+        },
+        {
+          "path": "node_modules/ox/node_modules/@noble/hashes",
+          "version": "1.8.0",
+          "license": "MIT"
+        },
+        {
+          "path": "node_modules/ox/node_modules/@scure/base",
+          "version": "1.2.6",
+          "license": "MIT"
+        },
+        {
+          "path": "node_modules/ox/node_modules/@scure/bip32",
+          "version": "1.7.0",
+          "license": "MIT"
+        },
+        {
+          "path": "node_modules/ox/node_modules/@scure/bip39",
+          "version": "1.6.0",
+          "license": "MIT"
+        },
+        {
+          "path": "node_modules/picocolors",
+          "version": "1.1.1",
+          "license": "ISC"
+        },
+        {
+          "path": "node_modules/readonly-date-esm",
+          "version": "2.0.0",
+          "license": "Apache-2.0"
+        },
+        {
+          "path": "node_modules/sisteransi",
+          "version": "1.0.5",
+          "license": "MIT"
+        },
+        {
+          "path": "node_modules/symbol-observable",
+          "version": "2.0.3",
+          "license": "MIT"
+        },
+        {
+          "path": "node_modules/viem",
+          "version": "2.57.5",
+          "license": "MIT"
+        },
+        {
+          "path": "node_modules/viem/node_modules/@noble/curves",
+          "version": "1.9.1",
+          "license": "MIT"
+        },
+        {
+          "path": "node_modules/viem/node_modules/@noble/hashes",
+          "version": "1.8.0",
+          "license": "MIT"
+        },
+        {
+          "path": "node_modules/viem/node_modules/@scure/base",
+          "version": "1.2.6",
+          "license": "MIT"
+        },
+        {
+          "path": "node_modules/viem/node_modules/@scure/bip32",
+          "version": "1.7.0",
+          "license": "MIT"
+        },
+        {
+          "path": "node_modules/viem/node_modules/@scure/bip39",
+          "version": "1.6.0",
+          "license": "MIT"
+        },
+        {
+          "path": "node_modules/viem/node_modules/ws",
+          "version": "8.21.0",
+          "license": "MIT"
+        },
+        {
+          "path": "node_modules/ws",
+          "version": "7.5.13",
+          "license": "MIT"
+        },
+        {
+          "path": "node_modules/xstream",
+          "version": "11.14.0",
+          "license": "MIT"
+        }
+      ]
+    }
+  ],
+  "fonts": {
+    "upstreamCopyright": "Copyright © 2017 IBM Corp. with Reserved Font Name \"Plex\"",
+    "copyrightSource": "https://raw.githubusercontent.com/IBM/plex/master/LICENSE.txt",
+    "installedNotice": "Fontsource LICENSE headers say Google Inc.; archived OpenType name IDs 0 and 14 identify IBM copyright and SIL URL; name ID 13 and WOFF2 extended metadata absent.",
+    "archivedNameRecords": [
+      {
+        "file": "plex-sans.woff2",
+        "sha256": "3b646991d30055a93a4ecc499713d4347953a74a947ecab435ab72070cbdab0e",
+        "fields": [
+          {
+            "id": 0,
+            "platform": 3,
+            "value": "Copyright 2019 IBM Corp. All rights reserved."
+          },
+          {
+            "id": 14,
+            "platform": 3,
+            "value": "http://scripts.sil.org/OFL"
+          }
+        ],
+        "extendedMetadataBytes": 0
+      },
+      {
+        "file": "plex-sans-semibold.woff2",
+        "sha256": "8960851d691c054ed38e259bdcf1a6190d157b4203ed5bb32c632a863fb8ec2f",
+        "fields": [
+          {
+            "id": 0,
+            "platform": 3,
+            "value": "Copyright 2019 IBM Corp. All rights reserved."
+          },
+          {
+            "id": 14,
+            "platform": 3,
+            "value": "http://scripts.sil.org/OFL"
+          }
+        ],
+        "extendedMetadataBytes": 0
+      },
+      {
+        "file": "plex-mono.woff2",
+        "sha256": "3c5a451f9ec27a354b0c2bcca636c6ec17a651281aabf29f8427e210a1d31e85",
+        "fields": [
+          {
+            "id": 0,
+            "platform": 3,
+            "value": "Copyright 2017 IBM Corp. All rights reserved."
+          },
+          {
+            "id": 14,
+            "platform": 3,
+            "value": "http://scripts.sil.org/OFL"
+          }
+        ],
+        "extendedMetadataBytes": 0
+      }
+    ]
+  },
+  "vectors": {
+    "repository": "https://github.com/qorechain/qoresign",
+    "path": "vectors/qoresign-v1.json",
+    "revision": "efe0f85d27cf4cb4b95758f81a7bea8c6153fb3e",
+    "tagsPointingAtRevision": [],
+    "license": "Apache-2.0",
+    "copyright": "Copyright 2026 QoreChain Association",
+    "rawUpstreamSha256": "bf920288d234204bb77c51b59aec0b3a6c9ce5735cef247a18629b4912186f7c",
+    "deployedSha256": "8444b1c39b5f4b2419055d704288656989193c80ac5e104adfb109242d15674e",
+    "modified": true,
+    "omittedPaths": [
+      "description",
+      "mnemonic",
+      "accounts.secp256k1.path",
+      "accounts.secp256k1.privateKey",
+      "accounts.secp256k1.publicKey",
+      "accounts.secp256k1.hex",
+      "accounts.eth_secp256k1",
+      "canonical.0.publicKeySha256",
+      "canonical.1.publicKeySha256",
+      "hd",
+      "hdRejected",
+      "hybridTx.accountNumber",
+      "hybridTx.bodyBytes",
+      "hybridTx.authInfoBytes",
+      "hybridTx.cases.0.signedBodyBytes",
+      "hybridTx.cases.0.classicalSignature",
+      "hybridTx.cases.0.txBytes",
+      "hybridTx.cases.1.signedBodyBytes",
+      "hybridTx.cases.1.classicalSignature",
+      "hybridTx.cases.1.txBytes",
+      "registerMessage"
+    ],
+    "addedPaths": 0,
+    "changedRetainedValues": 0,
+    "acquisition": "Original download used unpinned main. The matching revision establishes content equivalence, not definitive historical HEAD provenance.",
+    "evidence": "evidence/qoresign-vector-verification.json",
+    "licenseTextSource": "LICENSE at matching revision, preserved in host evidence and reproduced in THIRD_PARTY_NOTICES.md",
+    "noticeSource": "NOTICE at matching revision, preserved in host evidence and reproduced in THIRD_PARTY_NOTICES.md"
+  },
+  "forgeStd": {
+    "license": null,
+    "exactRevision": null,
+    "status": "Generated sample tests/script reference forge-std. No vendored contracts/lib or installed lib/forge-std was found in the examined trees. Upstream advertises Apache and MIT license files; exact template revision unverified.",
+    "upstream": "https://github.com/foundry-rs/forge-std"
+  },
+  "deployment": {
+    "frozen": true,
+    "noticesInArchive": false,
+    "noticeFile": "THIRD_PARTY_NOTICES.md",
+    "remaining": "Review distribution of full license and notice texts with the frozen assets. Repository-only notices do not establish redistribution compliance."
+  }
+}

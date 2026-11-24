@@ -1,0 +1,72 @@
+﻿UTC: 2026-11-24T01:54:57.9269888Z
+Frozen commit expected: 613335b03e1c95b587a67fada29031ed415e17de
+Rejected commit checked: 5bf46d278d96ec189f6f0cd725e8c3c827c500a7
+> git rev-parse v1.0.0^{commit}
+613335b03e1c95b587a67fada29031ed415e17de
+exit=0; expected=0
+> git fetch origin --tags
+exit=0; expected=0
+> git ls-remote origin
+ced65d4afb838009626b62c4d5386cedcebd00ae	HEAD
+ced65d4afb838009626b62c4d5386cedcebd00ae	refs/heads/master
+7e92fb2bc980f13366553532bf87a980bbcc387d	refs/pull/1/head
+5bf46d278d96ec189f6f0cd725e8c3c827c500a7	refs/pull/2/head
+68771c75ab5fb438eb9a74617c9b63608984f378	refs/tags/v0.1.0-rc1
+613335b03e1c95b587a67fada29031ed415e17de	refs/tags/v0.1.0-rc2
+613335b03e1c95b587a67fada29031ed415e17de	refs/tags/v1.0.0
+exit=0; expected=0
+> git rev-parse origin/master
+ced65d4afb838009626b62c4d5386cedcebd00ae
+exit=0; expected=0
+Remote master checked: ced65d4afb838009626b62c4d5386cedcebd00ae
+> git merge-base --is-ancestor v1.0.0 origin/master
+exit=0; expected=0
+> git merge-base --is-ancestor 5bf46d278d96ec189f6f0cd725e8c3c827c500a7 origin/master
+exit=1; expected=1
+> git diff --stat v1.0.0 origin/master
+ .github/workflows/product-pages.yml |  12 +-
+ .gitleaks.toml                      |  12 +
+ AI_USAGE.md                         |  16 +
+ CONTRIBUTING.md                     |  12 +
+ JUDGE_TEST.md                       |  39 ++
+ README.md                           | 120 ++++-
+ SECURITY.md                         |  25 +-
+ docs/POST_HACKATHON.md              |  12 +
+ evidence/acceptance-manifest.json   |  67 +++
+ evidence/rc2-session-a.json         | 935 +++++++++++++++++++++++++++++++++++
+ evidence/rc2-session-a.md           | 960 ++++++++++++++++++++++++++++++++++++
+ 11 files changed, 2201 insertions(+), 9 deletions(-)
+exit=0; expected=0
+> git diff --name-only v1.0.0 origin/master
+.github/workflows/product-pages.yml
+.gitleaks.toml
+AI_USAGE.md
+CONTRIBUTING.md
+JUDGE_TEST.md
+README.md
+SECURITY.md
+docs/POST_HACKATHON.md
+evidence/acceptance-manifest.json
+evidence/rc2-session-a.json
+evidence/rc2-session-a.md
+exit=0; expected=0
+> git for-each-ref --contains 5bf46d278d96ec189f6f0cd725e8c3c827c500a7 --format=%(objectname) %(refname) refs/remotes/origin
+exit=0; expected=0
+> git tag --contains 5bf46d278d96ec189f6f0cd725e8c3c827c500a7
+v1.1.0-rc1
+exit=0; expected=0
+Candidate branches confirmed against live origin refs:
+Candidate tags confirmed against live origin refs:
+> git rev-parse v1.1.0-rc1
+5bf46d278d96ec189f6f0cd725e8c3c827c500a7
+exit=0; expected=0
+> git rev-parse refs/heads/ui-polish
+5bf46d278d96ec189f6f0cd725e8c3c827c500a7
+exit=0; expected=0
+> git rev-parse refs/tags/v1.1.0-rc1^{commit}
+5bf46d278d96ec189f6f0cd725e8c3c827c500a7
+exit=0; expected=0
+> gh pr view 2 --repo ScapeXYZ/qorelens --json number,title,state,mergedAt,closedAt,headRefName,baseRefName,headRefOid,url
+{"baseRefName":"master","closedAt":"2026-11-23T16:22:33Z","headRefName":"ui-polish","headRefOid":"5bf46d278d96ec189f6f0cd725e8c3c827c500a7","mergedAt":null,"number":2,"state":"CLOSED","title":"ui: clarify session evidence and verdict presentation","url":"https://github.com/ScapeXYZ/qorelens/pull/2"}
+exit=0
+Result: checks passed; review the listed paths and refs.

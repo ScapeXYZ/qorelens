@@ -1,0 +1,51 @@
+{
+  "network": "Diana Testnet",
+  "nativeChainId": "qorechain-diana",
+  "evmChainId": 9800,
+  "addresses": {
+    "nativeSigner": "qor1ylgewp0h038mrnslyte4yst20q0zwdhqs7fujv",
+    "nativeSignerRegistry": "0x27d19705f77c4fb1ce1f22f352416a781e2736e0",
+    "probeDeployerNative": "qor19m2cl9pg6xs87u9w7wl4z9pnpu2exjufzzxhhj",
+    "probeDeployerEvm": "0x2ed58f9428D1A07F70AEF3BF5114330F15934b89"
+  },
+  "contract": {
+    "address": "0x05d2c199925e43767b79a6564542de75fa03f0c5",
+    "source": "contracts/QoreLensProbe.sol",
+    "method": "pqcKeyStatus"
+  },
+  "transactions": [
+    {
+      "role": "demo",
+      "hash": "5216F3E05807BDEBD8E843E831635FE60316D294FE94DE03690F3C5D520D8DDE",
+      "block": 10625585,
+      "code": 0,
+      "evidenceClass": "CHAIN-OBSERVED",
+      "source": "video-session-rpc-verification.json"
+    },
+    {
+      "role": "rc2 Session A",
+      "hash": "AD56AC8AEAC810C7393C96AD9CD31C55DDDC7ECD3C9C7F96BF6F03D653956E0A",
+      "block": 10570113,
+      "code": 0,
+      "evidenceClass": "CHAIN-OBSERVED",
+      "source": "acceptance-manifest.json"
+    },
+    {
+      "role": "rc1 Session A",
+      "historical": true,
+      "hash": "B839B613A4A1A386730C5B279B41C954C40E81EFB53C9371498EB622C9AB2C91",
+      "block": 10559088,
+      "code": 0,
+      "evidenceClass": "CHAIN-OBSERVED",
+      "source": "acceptance-manifest.json"
+    },
+    {
+      "role": "probe deployment",
+      "hash": "0x54029f6dca0b82dbde7a5de5325c5ca9bc88914d46cb17276e6ffdefd58ae36a",
+      "block": 10516811,
+      "evmReceiptStatus": "0x1",
+      "evidenceClass": "CHAIN-OBSERVED",
+      "source": "acceptance-manifest.json"
+    }
+  ]
+}
